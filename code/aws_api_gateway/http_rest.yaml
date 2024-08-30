@@ -72,3 +72,56 @@ components:
       required: true
       schema:
         type: string
+  responses:
+    ClientSideGeneralError:
+      description: Client side general error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OperationError"
+    ServerSideGeneralError:
+      description: Server side general error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OperationError"
+  schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: XXX
+        title:
+          type: string
+          example: Error processing something
+        details:
+          type: string
+          example: Error details
+      required:
+        - code
+        - message
+    Meta:
+      type: object
+      required:
+        - module
+        - version
+      properties:
+        module:
+          type: string
+          example: "maestria example"
+        version:
+          type: string
+          example: "v1"
+        integrationType:
+          type: string
+          example: "lambda"
+    OperationError:
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        errors:
+          type: array
+          items:
+            $ref: "#/components/schemas/Error"
