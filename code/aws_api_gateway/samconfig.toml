@@ -1,0 +1,14 @@
+version = 0.1
+[maestria100]
+[maestria100.deploy]
+[maestria100.deploy.parameters]
+stack_name = "maestria-a100"
+s3_bucket = "samclisourcebucket-nylrad"
+s3_prefix = "maestria-a100"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_AUTO_EXPAND CAPABILITY_NAMED_IAM CAPABILITY_IAM"
+parameter_overrides = "Env=\"pre\""
+
+
+# sam deploy --config-env 101

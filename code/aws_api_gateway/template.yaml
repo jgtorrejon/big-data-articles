@@ -1,0 +1,83 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  SAM Template for Maestria DataScience
+
+Parameters:
+  Env:
+    Type: String
+    Default: pre
+    Description: "Environment"
+
+Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${AWS::StackName}-role-lambda"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+
+  LambdaLogsAndMetricsPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Sub "${AWS::StackName}-LambdaLogsPolicy"
+      Roles:
+        - !Ref LambdaExecutionRole
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: PutMetrics
+            Action: cloudwatch:PutMetricData
+            Effect: Allow
+            Resource: "*"
+          - Sid: CreateLogsOfLambda
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Effect: Allow
+            Resource: arn:aws:logs:*:*:*
+
+
+  ExampleLambdaFunction:
+    Properties:
+      Environment:
+        Variables:
+          STACK_NAME: !Ref AWS::StackName
+          STACK_ENV: !Ref Env
+      CodeUri: .
+      Description: "lambda example"
+      Handler: lambda_function.handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Runtime: python3.9
+      Timeout: 50
+      MemorySize: 256
+      FunctionName: !Sub "${AWS::StackName}-lambda_example"
+    Type: AWS::Serverless::Function
+
+  ApiGW:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name:
+        Fn::Sub: api-${AWS::StackName}
+      StageName:
+        Ref: Env
+      DefinitionBody:
+        Fn::Transform:
+          Name: AWS::Include
+          Parameters:
+            Location: "http_rest.yaml"
+      OpenApiVersion: 3.0.0
+      EndpointConfiguration: REGIONAL
+
+  LambdaPermissionAGWForExample:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt ExampleLambdaFunction.Arn
+      Principal: apigateway.amazonaws.com
