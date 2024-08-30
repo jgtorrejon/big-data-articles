@@ -1,8 +1,8 @@
 # Api Gateway Example
 
 ## Requirements
-- AWS CLI [https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html](install)
-- SAM [https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html](install)
+- AWS CLI [install](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
+- SAM [install](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
 
 ## Build and Deploy
 
