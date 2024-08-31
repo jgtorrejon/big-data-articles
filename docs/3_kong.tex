@@ -1,7 +1,7 @@
 \section{Kong}
 Kong Gateway es una pasarela de API nativa en la nube ligera, rápida 
 y flexible y un proxy inverso que le permite gestionar, configurar y 
-dirigir las solicitudes a sus API.
+dirigir las solicitudes a sus API. \cite{kong-api-gateway}
 
 \subsection{Arquitectura desentralizada}
 Kong está construido sobre una arquitectura descentralizada, 
@@ -52,8 +52,10 @@ otras soluciones de observabilidad para rastrear el rendimiento de las API, erro
 y métricas clave. Esto permite una gestión proactiva y la resolución rápida de problemas.
 
 % TODO: Ayuda acá 
-Konnect Advanced Analytics
-
+\subsection{Konnect Advanced Analytics}
+Konnect Advanced Analytics es una plataforma en tiempo real que ofrece análisis detallados 
+de APIs para optimizar estrategias y mejorar la eficiencia operativa. Disponible como 
+servicio premium en Konnect. \cite{konnect-advanced-analytics}
 
 \begin{itemize}
   \item \textbf{Visibilidad centralizada}: Proporciona una visión integral y centralizada de todo el panorama de tus API para todas las APIs, servicios y planos de datos.
@@ -69,12 +71,11 @@ Kong Gateway utiliza un modelo de objetos para definir políticas de gestión de
 Los objetos clave, como servicios y rutas, se configuran de manera coordinada para establecer 
 el flujo de solicitudes y respuestas en el sistema. Las solicitudes se enrutan a los servicios 
 a través de las rutas definidas, mientras que las respuestas siguen el camino inverso, tal como se describe en 
-la siguiente imagén.
+la siguiente imagén. \cite{kong-services-routes}
 
 \begin{figure}[h!]
   \centering
-  % TODO: Ayuda acá con la imagen
-  \includegraphics[width=\textwidth]{images/kong-gateway.png}
+  \includegraphics[width=\columnwidth]{images/kong-gateway.png}
   \caption{Kong Gateway - Rutas y servicios}
   \label{fig:kong_gateway_rutas_servicios}
 \end{figure}
