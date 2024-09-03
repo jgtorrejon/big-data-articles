@@ -1,0 +1,27 @@
+name: Build LaTeX document
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up LaTeX environment
+      uses: dante-ev/latex-action@v2
+      with:
+        root_file: visualizers_article/article.tex
+        latexmk_options: -pdf
+
+    - name: Upload PDF artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: visualizers_article-pdf
+        path: visualizers_article/article.pdf
