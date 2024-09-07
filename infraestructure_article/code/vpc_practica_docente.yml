@@ -29,6 +29,11 @@ Parameters:
     Default: 192.168.192.0/18
     Description: CidrBlock for private subnet 02 within the VPC
 
+  AmiWebserverID:
+    Type: String
+    Default: ami-0182f373e66f89c85
+    Description: AMI ID, search it on your region, default us-east-1
+
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
@@ -270,6 +275,104 @@ Resources:
     Properties:
       GroupDescription: Security Groups for custom VPC
       VpcId: !Ref VPC
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow HTTP traffic on port 80 for ALB"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow traffic from ALB to EC2 on port 80"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          SourceSecurityGroupId: !Ref LoadBalancerSecurityGroup
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        
+  ApplicationLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub "${AWS::StackName}-ALB"
+      Scheme: internet-facing
+      SecurityGroups:
+        - !Ref LoadBalancerSecurityGroup
+      Subnets:
+        - !Ref PublicSubnet01
+        - !Ref PublicSubnet02
+  ALBTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: !Sub "${AWS::StackName}-ALB-Target-Group"
+      Protocol: HTTP
+      Port: 80
+      VpcId: !Ref VPC
+      HealthCheckProtocol: HTTP
+      HealthCheckPath: "/"
+      TargetType: instance
+      Matcher:
+        HttpCode: 200
+      Targets:
+        - Id: !Ref WebServer1
+        - Id: !Ref WebServer2
+
+  # Listener for the ALB (Listens on port 80)
+  ALBListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref ALBTargetGroup
+      LoadBalancerArn: !Ref ApplicationLoadBalancer
+      Port: 80
+      Protocol: HTTP
+  # EC2 Instance 1 (In Private Subnet 1)
+  WebServer1:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PrivateSubnet01
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-WebServer1"
+  WebServer2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PrivateSubnet02
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-WebServer2"
 
 Outputs:
 
@@ -280,3 +383,7 @@ Outputs:
   VpcId:
     Description: The VPC Id
     Value: !Ref VPC
+
+  LoadBalancerDNS:
+    Description: "DNS Name of the Public ALB"
+    Value: !GetAtt ApplicationLoadBalancer.DNSName
