@@ -33,6 +33,12 @@ Parameters:
     Type: String
     Default: ami-0182f373e66f89c85
     Description: AMI ID, search it on your region, default us-east-1
+  
+  RepoSSHURL:
+    Type: String
+    Default: git@github.com:bpdarlyn/big_data_html.git
+    Description: Url where clone the project
+  
 
 Metadata:
   AWS::CloudFormation::Interface:
@@ -339,41 +345,194 @@ Resources:
   # EC2 Instance 1 (In Private Subnet 1)
   WebServer1:
     Type: AWS::EC2::Instance
+    DependsOn: BucketResource
     Properties:
       InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
       SecurityGroupIds:
         - !Ref InstanceSecurityGroup
       SubnetId: !Ref PrivateSubnet01
       ImageId: !Ref AmiWebserverID
       UserData:
-        Fn::Base64: |
-          #!/bin/bash
-          sudo yum update -y
-          sudo yum install -y nginx
-          sudo systemctl enable nginx
-          sudo systemctl start nginx
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash
+            sudo yum update -y
+            sudo yum install -y nginx git
+            sudo systemctl enable nginx
+            sudo systemctl start nginx
+            aws s3 cp s3://${BucketResource}/id_rsa ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            aws s3 cp s3://${BucketResource}/known_hosts ~/.ssh/known_hosts
+
+            TARGET_DIRECTORY="/usr/share/nginx/html"
+            TEMP_DIRECTORY="/tmp/repo_clone"
+
+            sudo rm -rf "$TEMP_DIRECTORY"
+
+            git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+            sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+            sudo systemctl restart nginx
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-WebServer1"
   WebServer2:
     Type: AWS::EC2::Instance
+    DependsOn: BucketResource
     Properties:
       InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
       SecurityGroupIds:
         - !Ref InstanceSecurityGroup
       SubnetId: !Ref PrivateSubnet02
       ImageId: !Ref AmiWebserverID
       UserData:
-        Fn::Base64: |
-          #!/bin/bash
-          sudo yum update -y
-          sudo yum install -y nginx
-          sudo systemctl enable nginx
-          sudo systemctl start nginx
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash
+            sudo yum update -y
+            sudo yum install -y nginx git
+            sudo systemctl enable nginx
+            sudo systemctl start nginx
+            aws s3 cp s3://${BucketResource}/id_rsa ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            aws s3 cp s3://${BucketResource}/known_hosts ~/.ssh/known_hosts
+
+            TARGET_DIRECTORY="/usr/share/nginx/html"
+            TEMP_DIRECTORY="/tmp/repo_clone"
+
+            sudo rm -rf "$TEMP_DIRECTORY"
+
+            git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+            sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+            sudo systemctl restart nginx
+
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-WebServer2"
+  # Lambda Execution Role
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaVPCEndpointPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:*
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "*"
+  # Lambda Function for Custom Resource
+  VPCEndpointLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: "CreateDeleteEC2InstanceConnectEndpoint"
+      Handler: "index.handler"
+      Runtime: python3.9
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Timeout: 300
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import cfnresponse
 
+          ec2 = boto3.client('ec2')
+
+          def handler(event, context):
+              print('GOT EVENT', event)
+              responseData = {}
+              try:
+                  if event['RequestType'] == 'Create':
+                      # Create EC2 Instance Connect Endpoint
+                      subnet_id = event['ResourceProperties']['SubnetId']
+                      sg_ids = event['ResourceProperties']['SGIds']
+                      tag_specifications = event['ResourceProperties']['TagSpecifications']
+                      response = ec2.create_instance_connect_endpoint(
+                          SecurityGroupIds=sg_ids,
+                          SubnetId=subnet_id,
+                          TagSpecifications=tag_specifications
+                      )
+                      responseData['InstanceConnectEndpointId'] = response['InstanceConnectEndpoint']['InstanceConnectEndpointId']
+                      physicalResourceId = responseData['InstanceConnectEndpointId']
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData, physicalResourceId)
+
+                  elif event['RequestType'] == 'Delete':
+                      # Delete EC2 Instance Connect Endpoint
+                      instance_connect_id = event['PhysicalResourceId']
+                      ec2.delete_instance_connect_endpoint(
+                          InstanceConnectEndpointId=instance_connect_id
+                      )
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, {})
+
+                  elif event['RequestType'] == 'Update':
+                      # Handle updates (if necessary)
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+
+              except Exception as e:
+                  print(e)
+                  cfnresponse.send(event, context, cfnresponse.FAILED, responseData)
+
+  # Custom Resource invoking the Lambda function
+  CreateDeleteEC2InstanceConnectEndpoint:
+    Type: Custom::EC2InstanceConnectEndpoint
+    Properties:
+      ServiceToken: !GetAtt VPCEndpointLambda.Arn
+      SubnetId: !Ref PrivateSubnet01
+      SGIds:
+        - !Ref InstanceSecurityGroup
+      TagSpecifications:
+        - ResourceType: instance-connect-endpoint
+          Tags:
+            - Key: "Name"
+              Value: !Sub "${AWS::StackName}-ConnectEndpoint"
+  BucketResource:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Fn::Sub: ${AWS::StackName}.resources
+  # IAM Role for EC2 to allow access to S3
+  EC2AccessRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: EC2S3WritePolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:*
+                Resource: !Sub "arn:aws:s3:::${BucketResource}/*"
+  # IAM Instance Profile for EC2 Role
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref EC2AccessRole
 Outputs:
 
   SubnetIds:
