@@ -1,0 +1,880 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'vpc.yml Contains 2 Public Segments and 2 Private Segments'
+
+Parameters:
+
+  VpcBlock:
+    Type: String
+    Default: 10.0.0.0/16
+    Description: The CIDR range for the VPC. This should be a valid private (RFC 1918) CIDR range.
+
+  PublicSubnet01Block:
+    Type: String
+    Default: 10.0.1.0/24
+    Description: CidrBlock for public subnet 01 within the VPC
+
+  PublicSubnet02Block:
+    Type: String
+    Default: 10.0.2.0/24
+    Description: CidrBlock for public subnet 02 within the VPC
+
+  PrivateSubnet01Block:
+    Type: String
+    Default: 10.0.3.0/24
+    Description: CidrBlock for private subnet 01 within the VPC
+
+  PrivateSubnet02Block:
+    Type: String
+    Default: 10.0.4.0/24
+    Description: CidrBlock for private subnet 02 within the VPC
+
+  AmiWebserverID:
+    Type: String
+    Default: ami-0182f373e66f89c85
+    Description: AMI ID, search it on your region, default us-east-1
+
+  StackPersistence:
+    Type: String
+    Default: maestria
+    Description: Stack where we need resources
+
+  RepoSSHURL:
+    Type: String
+    Default: git@github.com:bpdarlyn/big_data_html.git
+    Description: Url where clone the project for web servers
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      -
+        Label:
+          default: "Worker Network Configuration"
+        Parameters:
+          - VpcBlock
+          - PublicSubnet01Block
+          - PublicSubnet02Block
+          - PrivateSubnet01Block
+          - PrivateSubnet02Block
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock:  !Ref VpcBlock
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value: !Sub '${AWS::StackName}-VPC'
+
+  InternetGateway:
+    Type: "AWS::EC2::InternetGateway"
+
+  VPCGatewayAttachment:
+    Type: "AWS::EC2::VPCGatewayAttachment"
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+      - Key: Name
+        Value: Public Subnets
+
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+      - Key: Name
+        Value: Private Subnets
+
+  PublicRouteForIGW:
+    DependsOn: VPCGatewayAttachment
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  PrivateRoute:
+    DependsOn:
+      - VPCGatewayAttachment
+      - NatGateway
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGateway
+
+  PublicSubnet01:
+    Type: AWS::EC2::Subnet
+    Metadata:
+      Comment: Subnet 01
+    Properties:
+      MapPublicIpOnLaunch: true
+      AvailabilityZone:
+        Fn::Select:
+        - '0'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: PublicSubnet01Block
+      VpcId:
+        Ref: VPC
+      Tags:
+      - Key: Name
+        Value: !Sub "${AWS::StackName}-PublicSubnet01"
+
+  PublicSubnet02:
+    Type: AWS::EC2::Subnet
+    Metadata:
+      Comment: Subnet 02
+    Properties:
+      MapPublicIpOnLaunch: true
+      AvailabilityZone:
+        Fn::Select:
+        - '1'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: PublicSubnet02Block
+      VpcId:
+        Ref: VPC
+      Tags:
+      - Key: Name
+        Value: !Sub "${AWS::StackName}-PublicSubnet02"
+
+  PrivateSubnet01:
+    Type: AWS::EC2::Subnet
+    Metadata:
+      Comment: Subnet 03
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '2'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: PrivateSubnet01Block
+      VpcId:
+        Ref: VPC
+      Tags:
+      - Key: Name
+        Value: !Sub "${AWS::StackName}-PrivateSubnet01"
+
+  PrivateSubnet02:
+    Type: AWS::EC2::Subnet
+    Metadata:
+      Comment: Private Subnet 02
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '3'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: PrivateSubnet02Block
+      VpcId:
+        Ref: VPC
+      Tags:
+      - Key: Name
+        Value: !Sub "${AWS::StackName}-PrivateSubnet02"
+
+  PublicSubnet01RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet01
+      RouteTableId: !Ref PublicRouteTable
+
+  PublicSubnet02RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet02
+      RouteTableId: !Ref PublicRouteTable
+
+  PrivateSubnet01RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnet01
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateSubnet02RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnet02
+      RouteTableId: !Ref PrivateRouteTable
+
+  NatGatewayEIP:
+    DependsOn:
+      - VPCGatewayAttachment
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+
+  NatGateway:
+    DependsOn:
+      - NatGatewayEIP
+      - PublicSubnet01
+      - VPCGatewayAttachment
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt 'NatGatewayEIP.AllocationId'
+      SubnetId: !Ref PublicSubnet01
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-NatGatewayAZ1'
+
+  GenericSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security Groups for custom VPC
+      VpcId: !Ref VPC
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow HTTP traffic on port 80 for ALB"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow traffic from ALB to EC2 on port 80"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          SourceSecurityGroupId: !Ref LoadBalancerSecurityGroup
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+  EC2AccessRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: EC2S3WritePolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:*
+                Resource: !Sub "arn:aws:s3:::${StackPersistence}-persistence-resources/*"
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref EC2AccessRole
+  WebServer1:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PublicSubnet01
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-ws1"
+  WebServer2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PublicSubnet01
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-ws2"
+  WebServer3:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PublicSubnet01
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-ws3"
+  WebServer4:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PublicSubnet02
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-ws4"
+  WebServer5:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PublicSubnet02
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-ws5"
+  WebServer6:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PublicSubnet02
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-ws6"
+
+  ApplicationLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub "${AWS::StackName}-ALB"
+      Scheme: internet-facing
+      SecurityGroups:
+        - !Ref LoadBalancerSecurityGroup
+      Subnets:
+        - !Ref PublicSubnet01
+        - !Ref PublicSubnet02
+
+  ALBTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: !Sub "${AWS::StackName}-ALB-Target-Group"
+      Protocol: HTTP
+      Port: 80
+      VpcId: !Ref VPC
+      HealthCheckProtocol: HTTP
+      HealthCheckPath: "/"
+      TargetType: instance
+      Matcher:
+        HttpCode: 200
+      Targets:
+        - Id: !Ref WebServer1
+        - Id: !Ref WebServer2
+        - Id: !Ref WebServer3
+        - Id: !Ref WebServer4
+        - Id: !Ref WebServer5
+        - Id: !Ref WebServer6
+
+  # Listener for the ALB (Listens on port 80)
+  ALBListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref ALBTargetGroup
+      LoadBalancerArn: !Ref ApplicationLoadBalancer
+      Port: 80
+      Protocol: HTTP
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaVPCEndpointPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:*
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "*"
+  # Lambda Function for Custom Resource
+  VPCEndpointLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: "CreateDeleteEC2InstanceConnectEndpoint"
+      Handler: "index.handler"
+      Runtime: python3.9
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Timeout: 300
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import cfnresponse
+
+          ec2 = boto3.client('ec2')
+
+          def handler(event, context):
+              print('GOT EVENT', event)
+              responseData = {}
+              try:
+                  if event['RequestType'] == 'Create':
+                      # Create EC2 Instance Connect Endpoint
+                      subnet_id = event['ResourceProperties']['SubnetId']
+                      sg_ids = event['ResourceProperties']['SGIds']
+                      tag_specifications = event['ResourceProperties']['TagSpecifications']
+                      response = ec2.create_instance_connect_endpoint(
+                          SecurityGroupIds=sg_ids,
+                          SubnetId=subnet_id,
+                          TagSpecifications=tag_specifications
+                      )
+                      responseData['InstanceConnectEndpointId'] = response['InstanceConnectEndpoint']['InstanceConnectEndpointId']
+                      physicalResourceId = responseData['InstanceConnectEndpointId']
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData, physicalResourceId)
+
+                  elif event['RequestType'] == 'Delete':
+                      # Delete EC2 Instance Connect Endpoint
+                      instance_connect_id = event['PhysicalResourceId']
+                      ec2.delete_instance_connect_endpoint(
+                          InstanceConnectEndpointId=instance_connect_id
+                      )
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, {})
+
+                  elif event['RequestType'] == 'Update':
+                      # Handle updates (if necessary)
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+
+              except Exception as e:
+                  print(e)
+                  cfnresponse.send(event, context, cfnresponse.FAILED, responseData)
+
+  # Custom Resource invoking the Lambda function
+  CreateDeleteEC2InstanceConnectEndpoint:
+    Type: Custom::EC2InstanceConnectEndpoint
+    Properties:
+      ServiceToken: !GetAtt VPCEndpointLambda.Arn
+      SubnetId: !Ref PrivateSubnet01
+      SGIds:
+        - !Ref InstanceSecurityGroup
+      TagSpecifications:
+        - ResourceType: instance-connect-endpoint
+          Tags:
+            - Key: "Name"
+              Value: !Sub "${AWS::StackName}-ConnectEndpoint"
+
+  # Private Resources
+  PrivateWebServer1:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PrivateSubnet01
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-private-ws1"
+  PrivateWebServer2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PrivateSubnet01
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-private-ws2"
+  PrivateWebServer3:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PrivateSubnet01
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-private-ws3"
+  PrivateWebServer4:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PrivateSubnet02
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-private-ws4"
+  PrivateWebServer5:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PrivateSubnet02
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-private-ws5"
+  PrivateWebServer6:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Sub "${StackPersistence}-PublicAccess"
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref PrivateSubnet02
+      ImageId: !Ref AmiWebserverID
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nginx git
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+          aws s3 cp s3://${StackPersistence}-persistence-resources/id_rsa ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          aws s3 cp s3://${StackPersistence}-persistence-resources/known_hosts ~/.ssh/known_hosts
+
+          TARGET_DIRECTORY="/usr/share/nginx/html"
+          TEMP_DIRECTORY="/tmp/repo_clone"
+
+          sudo rm -rf "$TEMP_DIRECTORY"
+
+          git clone "${RepoSSHURL}" "$TEMP_DIRECTORY"
+          sudo cp -R "$TEMP_DIRECTORY/." "$TARGET_DIRECTORY"
+
+          sudo systemctl restart nginx
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-private-ws6"
+
+  PrivateApplicationLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub "${AWS::StackName}-Private-ALB"
+      Scheme: internal
+      SecurityGroups:
+        - !Ref LoadBalancerSecurityGroup
+      Subnets:
+        - !Ref PrivateSubnet01
+        - !Ref PrivateSubnet02
+
+  PrivateALBTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: !Sub "${AWS::StackName}-Private-ALB-Target-Group"
+      Protocol: HTTP
+      Port: 80
+      VpcId: !Ref VPC
+      HealthCheckProtocol: HTTP
+      HealthCheckPath: "/"
+      TargetType: instance
+      Matcher:
+        HttpCode: 200
+      Targets:
+        - Id: !Ref PrivateWebServer1
+        - Id: !Ref PrivateWebServer2
+        - Id: !Ref PrivateWebServer3
+        - Id: !Ref PrivateWebServer4
+        - Id: !Ref PrivateWebServer5
+        - Id: !Ref PrivateWebServer6
+
+  # Listener for the ALB (Listens on port 80)
+  PrivateALBListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref PrivateALBTargetGroup
+      LoadBalancerArn: !Ref PrivateApplicationLoadBalancer
+      Port: 80
+      Protocol: HTTP
+
+Outputs:
+
+  SubnetIds:
+    Description: Subnets IDs in the VPC
+    Value: !Join [ ",", [ !Ref PublicSubnet01, !Ref PublicSubnet02, !Ref PrivateSubnet01, !Ref PrivateSubnet02 ] ]
+
+  VpcId:
+    Description: The VPC Id
+    Value: !Ref VPC
+
+  LoadBalancerDNS:
+    Description: "DNS Name of the Public ALB"
+    Value: !GetAtt ApplicationLoadBalancer.DNSName

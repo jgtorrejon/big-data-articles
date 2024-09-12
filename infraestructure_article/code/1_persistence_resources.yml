@@ -1,0 +1,112 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: '1_persistence_resources.yml Contains all required resources before starting anything'
+
+Resources:
+  S3BucketTMP:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub '${AWS::StackName}-persistence-resources'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+    DeletionPolicy: Delete
+  # Lambda Execution Role
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaKeyPairPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:*
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - s3:*
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "*"
+  # Lambda Function for Custom Resource
+  EC2KeyPairLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: "CreateDeleteEC2KeyPair"
+      Handler: "index.handler"
+      Runtime: python3.9
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Timeout: 300
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import os
+          import cfnresponse
+
+          ec2 = boto3.client('ec2')
+          s3 = boto3.client('s3')
+
+          def handler(event, context):
+              print('GOT EVENT', event)
+              responseData = {}
+              try:
+                  if event['RequestType'] == 'Create':
+                      # Create EC2 Instance Connect Endpoint
+                      key_name = event['ResourceProperties']['KeyName']
+                      bucket_name = event['ResourceProperties']['BucketName']
+                      s3_key = event['ResourceProperties']['S3Key']
+                      response = ec2.create_key_pair(
+                          KeyName=key_name
+                      )
+          
+                      private_key = response['KeyMaterial']
+                      file_name = '/tmp/tmp_keypar.pem'
+                      with open(file_name, 'w') as file:
+                          file.write(private_key)                    
+                      os.chmod(file_name, 0o400)
+                      
+                      s3.upload_file(file_name, bucket_name, s3_key)
+          
+                      physicalResourceId = key_name
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData, physicalResourceId)
+
+                  elif event['RequestType'] == 'Delete':
+                      # Delete Key Pair
+                      key_pair_name = event['PhysicalResourceId']
+                      ec2.delete_key_pair(
+                          KeyName=key_pair_name
+                      )
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, {})
+
+                  elif event['RequestType'] == 'Update':
+                      # Handle updates (if necessary)
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+
+              except Exception as e:
+                  print(e)
+                  cfnresponse.send(event, context, cfnresponse.FAILED, responseData)
+
+  CreateDeleteEC2KeyPairCustom:
+    DependsOn:
+      - S3BucketTMP
+    Type: Custom::EC2KeyPairCustom
+    Properties:
+      ServiceToken: !GetAtt EC2KeyPairLambda.Arn
+      KeyName: !Sub "${AWS::StackName}-PublicAccess"
+      BucketName: !Ref S3BucketTMP
+      S3Key: !Sub "keypair/${AWS::StackName}.pem"
