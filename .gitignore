@@ -313,3 +313,5 @@ TSWLatexianTemp*
 .DS_Store
 
 # End of https://www.toptal.com/developers/gitignore/api/latex
+*id_rsa
+*id_rsa.pub
