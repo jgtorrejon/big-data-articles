@@ -246,9 +246,13 @@ Resources:
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "Allow traffic from ALB to EC2 on port 80"
+      GroupDescription: "Allow traffic"
       VpcId: !Ref VPC
       SecurityGroupIngress:
+        - IpProtocol: "icmp"
+          FromPort: -1
+          ToPort: -1
+          CidrIp: "0.0.0.0/0"
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
