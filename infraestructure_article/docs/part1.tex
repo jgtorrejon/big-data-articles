@@ -1,0 +1,15 @@
+\newpage
+\section{Problema}
+\subsection{Enunciado}
+Una empresa dispone de 4 oficinas (Oficina01, Oficina02, Oficina03, Oficina04), donde tiene varios servicios desplegados, para lo cual se requiere:
+
+\begin{itemize}
+    \item 1. Cada oficina tiene 2 redes, una publica y otra privada, donde cada red dispone de 2 servidores web, excepto la oficina01 que tiene 4 redes (2 publicas y 2 privadas), así mismo cada red dispone de 3 servidores.
+    \item 2. Se precisa poder establecer acceso publico a todos los servidores de las redes publicas, teniendo en cuenta que el acceso publico desde/hacia internet en la oficina01 debe ser compartida.
+    \item 3. En la oficina01 se requiere habilitar alta disponibilidad bajo las siguientes características:
+        \begin{itemize}
+            \item a) alta disponibilidad para servidores web públicos de acceso desde internet
+            \item b) alta disponibilidad para servidores web internos de acceso desde las demás oficinas
+        \end{itemize}
+    \item 4. Por temas de administración se requiere habilitar acceso desde la oficina01 a todas las oficinas, pero teniendo en cuenta que las demás oficinas no pueden conectarse entre si.
+\end{itemize}
