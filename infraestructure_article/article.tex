@@ -1,0 +1,85 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Imports
+\usepackage{xurl}
+\usepackage{graphicx}
+\usepackage{helvet}
+\usepackage{fancyhdr}
+\usepackage{biblatex}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage[spanish]{babel}
+
+% Settings
+\pagestyle{fancy}
+\addbibresource{bibliography.bib}
+\fancyhead[L]{}
+\hypersetup{urlcolor=yellow}
+\graphicspath{ {./images/} }
+
+% Renew commands
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\contentsname}{Contenido}
+
+% Create variables
+\newcommand{\hmwTitle}{TRABAJO FINAL}
+\newcommand{\hmwClass}{CLOUD COMPUTING E INFRAESTRUCTURA PARA BIG DATA}
+\newcommand{\hmwAuthorFirst}{Bravo Peña Darlyn}
+\newcommand{\hmwAuthorSecond}{Torrejón Méndez Joel Gabriel}
+\newcommand{\hmwAuthorThird}{Valle Tamayo Brandon Jason}
+
+% Setup code style
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% Setup title
+\title{\vspace{1in}\textmd{\textbf{\hmwTitle}}\\\vspace{0.5in}\textmd{\hmwClass}\\\vspace{2.5in}}
+\date{}
+\author{\textnormal{\hmwAuthorFirst}\\\textnormal{\hmwAuthorSecond}\\\textnormal{\hmwAuthorThird}}
+
+% Init document
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+% Table of contents
+\newpage
+\thispagestyle{plain}
+\tableofcontents
+\listoffigures
+
+% Homework parts
+\include{docs/part1.tex}
+\include{docs/part2.tex}
+
+\newpage
+\thispagestyle{plain}
+\printbibliography[heading=bibintoc]
+
+\end{document}

@@ -1,0 +1,202 @@
+\section{Solución}
+
+\subsection{Video}
+Desarrollamos un video explicativo de la solución propuesta:
+
+\href{https://drive.google.com/file/d/1IIQQ8OpVXsB-cUmFpYa2JtmtrdjKh3AB}{https://drive.google.com/file/d/1IIQQ8OpVXsB-cUmFpYa2JtmtrdjKh3AB}
+
+\subsection{Descripción}
+Dado todo el contexto del problema definimos la siguiente arquitectura.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{network_achitecture.jpg}
+    \caption{Arquitectura de la solución}
+\end{figure}
+
+\subsection{Capturas de la configuración}
+Adjuntamos las capturas de la configuración de la solución propuesta,
+las siguientes se organizarán de la siguiente manera:
+
+\subsubsection{VPC}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{office1/vpc.png}
+    \caption{VPC Oficina Nro 1}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{office2/vpc.png}
+    \caption{VPC Oficina Nro 2}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{office3/vpc.png}
+    \caption{VPC Oficina Nro 3}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{office4/vpc.png}
+    \caption{VPC Oficina Nro 4}
+\end{figure}
+
+
+\subsubsection{Subredes públicas}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office1/public_network.png}
+    \caption{Subred pública Oficina Nro 1}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office2/public_network.png}
+    \caption{Subred pública Oficina Nro 2}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office3/public_network.png}
+    \caption{Subred pública Oficina Nro 3}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office4/public_network.png}
+    \caption{Subred pública Oficina Nro 4}
+\end{figure}
+
+
+
+\subsubsection{Subredes privadas}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office1/private_network.png}
+    \caption{Subred privada Oficina Nro 1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office2/private_network.png}
+    \caption{Subred privada Oficina Nro 2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office3/private_network.png}
+    \caption{Subred privada Oficina Nro 3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office4/private_network.png}
+    \caption{Subred privada Oficina Nro 4}
+\end{figure}
+
+
+\subsubsection{Load balancer público}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office1/load_balancer_public.png}
+    \caption{Load balancer público Oficina Nro 1}
+\end{figure}
+
+
+\subsubsection{Load balancer privado}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office1/load_balancer_private.png}
+    \caption{Load balancer privado Oficina Nro 1}
+\end{figure}
+
+
+\subsubsection{Internet gateway}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office1/internet_gateway.png}
+    \caption{Internet gateway Oficina Nro 1}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office2/internet_gateway.png}
+    \caption{Internet gateway Oficina Nro 2}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office3/internet_gateway.png}
+    \caption{Internet gateway Oficina Nro 3}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office4/internet_gateway.png}
+    \caption{Internet gateway Oficina Nro 4}
+\end{figure}
+
+\subsubsection{Nat gateway}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office1/nat_gateway.png}
+    \caption{Nat gateway Oficina Nro 1}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office2/nat_gateway.png}
+    \caption{Nat gateway Oficina Nro 2}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office3/nat_gateway.png}
+    \caption{Nat gateway Oficina Nro 3}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office4/nat_gateway.png}
+    \caption{Nat gateway Oficina Nro 4}
+\end{figure}
+
+
+\subsubsection{EC2}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office1/instances.png}
+    \caption{EC2 Oficina Nro 1}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office2/instances.png}
+    \caption{EC2 Oficina Nro 2}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office3/instances.png}
+    \caption{EC2 Oficina Nro 3}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office4/instances.png}
+    \caption{EC2 Oficina Nro 4}
+\end{figure}
+
+\subsubsection{Peering connections}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office2/peering.png}
+    \caption{Peering connections Oficina Nro 2}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office3/peering.jpeg}
+    \caption{Peering connections Oficina Nro 3}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{office4/peering.jpeg}
+    \caption{Peering connections Oficina Nro 4}
+\end{figure}
+
+
+\subsection{IAAC}
+Este proyecto tb lo pudimos trabajar como Infraestructure as a code, para ello
+adjuntamos un link a los templates desarrollados:
+
+\begin{itemize}
+    \item \href{https://drive.google.com/file/d/1u4f-frY8Qxzu-rSUNlfpc-P0J_J1hXkT/view?usp=drive_link}{Archivo Oficina Nro 1}
+    \item \href{https://drive.google.com/file/d/1HNa-tv0MkeSS53UXJ5UDpZrJcfHCE2PN/view?usp=drive_link}{Archivo Oficinas Nro 2 a 4}
+\end{itemize}
