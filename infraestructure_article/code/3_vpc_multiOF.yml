@@ -433,69 +433,69 @@ Resources:
                   - logs:PutLogEvents
                 Resource: "*"
   # Lambda Function for Custom Resource
-  VPCEndpointLambda:
-    Type: AWS::Lambda::Function
-    Properties:
-      FunctionName: "CreateDeleteEC2InstanceConnectEndpoint"
-      Handler: "index.handler"
-      Runtime: python3.9
-      Role: !GetAtt LambdaExecutionRole.Arn
-      Timeout: 300
-      Code:
-        ZipFile: |
-          import json
-          import boto3
-          import cfnresponse
-
-          ec2 = boto3.client('ec2')
-
-          def handler(event, context):
-              print('GOT EVENT', event)
-              responseData = {}
-              try:
-                  if event['RequestType'] == 'Create':
-                      # Create EC2 Instance Connect Endpoint
-                      subnet_id = event['ResourceProperties']['SubnetId']
-                      sg_ids = event['ResourceProperties']['SGIds']
-                      tag_specifications = event['ResourceProperties']['TagSpecifications']
-                      response = ec2.create_instance_connect_endpoint(
-                          SecurityGroupIds=sg_ids,
-                          SubnetId=subnet_id,
-                          TagSpecifications=tag_specifications
-                      )
-                      responseData['InstanceConnectEndpointId'] = response['InstanceConnectEndpoint']['InstanceConnectEndpointId']
-                      physicalResourceId = responseData['InstanceConnectEndpointId']
-                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData, physicalResourceId)
-
-                  elif event['RequestType'] == 'Delete':
-                      # Delete EC2 Instance Connect Endpoint
-                      instance_connect_id = event['PhysicalResourceId']
-                      ec2.delete_instance_connect_endpoint(
-                          InstanceConnectEndpointId=instance_connect_id
-                      )
-                      cfnresponse.send(event, context, cfnresponse.SUCCESS, {})
-
-                  elif event['RequestType'] == 'Update':
-                      # Handle updates (if necessary)
-                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
-
-              except Exception as e:
-                  print(e)
-                  cfnresponse.send(event, context, cfnresponse.FAILED, responseData)
+#  VPCEndpointLambda:
+#    Type: AWS::Lambda::Function
+#    Properties:
+#      FunctionName: "CreateDeleteEC2InstanceConnectEndpoint"
+#      Handler: "index.handler"
+#      Runtime: python3.9
+#      Role: !GetAtt LambdaExecutionRole.Arn
+#      Timeout: 300
+#      Code:
+#        ZipFile: |
+#          import json
+#          import boto3
+#          import cfnresponse
+#
+#          ec2 = boto3.client('ec2')
+#
+#          def handler(event, context):
+#              print('GOT EVENT', event)
+#              responseData = {}
+#              try:
+#                  if event['RequestType'] == 'Create':
+#                      # Create EC2 Instance Connect Endpoint
+#                      subnet_id = event['ResourceProperties']['SubnetId']
+#                      sg_ids = event['ResourceProperties']['SGIds']
+#                      tag_specifications = event['ResourceProperties']['TagSpecifications']
+#                      response = ec2.create_instance_connect_endpoint(
+#                          SecurityGroupIds=sg_ids,
+#                          SubnetId=subnet_id,
+#                          TagSpecifications=tag_specifications
+#                      )
+#                      responseData['InstanceConnectEndpointId'] = response['InstanceConnectEndpoint']['InstanceConnectEndpointId']
+#                      physicalResourceId = responseData['InstanceConnectEndpointId']
+#                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData, physicalResourceId)
+#
+#                  elif event['RequestType'] == 'Delete':
+#                      # Delete EC2 Instance Connect Endpoint
+#                      instance_connect_id = event['PhysicalResourceId']
+#                      ec2.delete_instance_connect_endpoint(
+#                          InstanceConnectEndpointId=instance_connect_id
+#                      )
+#                      cfnresponse.send(event, context, cfnresponse.SUCCESS, {})
+#
+#                  elif event['RequestType'] == 'Update':
+#                      # Handle updates (if necessary)
+#                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+#
+#              except Exception as e:
+#                  print(e)
+#                  cfnresponse.send(event, context, cfnresponse.FAILED, responseData)
 
   # Custom Resource invoking the Lambda function
-  CreateDeleteEC2InstanceConnectEndpoint:
-    Type: Custom::EC2InstanceConnectEndpoint
-    Properties:
-      ServiceToken: !GetAtt VPCEndpointLambda.Arn
-      SubnetId: !Ref PrivateSubnet
-      SGIds:
-        - !Ref InstanceSecurityGroup
-      TagSpecifications:
-        - ResourceType: instance-connect-endpoint
-          Tags:
-            - Key: "Name"
-              Value: !Sub "${AWS::StackName}-${OfficeName}-ConnectEndpoint"
+#  CreateDeleteEC2InstanceConnectEndpoint:
+#    Type: Custom::EC2InstanceConnectEndpoint
+#    Properties:
+#      ServiceToken: !GetAtt VPCEndpointLambda.Arn
+#      SubnetId: !Ref PrivateSubnet
+#      SGIds:
+#        - !Ref InstanceSecurityGroup
+#      TagSpecifications:
+#        - ResourceType: instance-connect-endpoint
+#          Tags:
+#            - Key: "Name"
+#              Value: !Sub "${AWS::StackName}-ConnectEndpoint"
 
 Outputs:
 
