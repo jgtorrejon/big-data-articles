@@ -1,0 +1,7 @@
+\newpage
+\section{Preparación de datos}
+\subsection{Enunciado}
+Estandarización: Antes de aplicar PCA, asegúrate de estandarizar las variables cuantitativas para que tengan media cero y desviación estándar uno. Esto es importante, ya que PCA es sensible a la escala de los datos. Nota: Sklearn utiliza la matriz de covarianza y esa es la razón por la que hay que estandarizar previamente.
+Matriz de Correlación: Visualizar la matriz de correlación de las variables originales antes de aplicar PCA. Como regla general:
+Un rango óptimo de correlación entre variables se sitúa entre ±0.5 y ±0.9. Las correlaciones más bajas indican que las variables no están relacionadas, lo que podría implicar que PCA no reducirá significativamente la dimensionalidad.
+Si la correlación entre muchas variables es cercana a cero, PCA puede no ser tan efectivo. Idealmente, deberías observar varias correlaciones moderadas a fuertes entre las variables.
