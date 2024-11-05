@@ -15,15 +15,14 @@ Tomando en cuenta las variables que se utilizarán, esto nos muestra la transfor
 \hline
 \textbf{Variable} & \textbf{Media} \\ \hline
 Age                       & -3.504377e-17 \\ \hline
-DailyRate                  &  5.075305e-17 \\ \hline
-HourlyRate                 &  1.691768e-16 \\ \hline
-MonthlyIncome              & -4.471102e-17 \\ \hline
-MonthlyRate                &  3.021015e-17 \\ \hline
+JobLevel                  & -2.658493e-17 \\ \hline
+MonthlyIncome             & -4.471102e-17 \\ \hline
 NumCompaniesWorked         &  1.450087e-17 \\ \hline
 TotalWorkingYears          & -1.208406e-18 \\ \hline
 YearsAtCompany             & -3.021015e-17 \\ \hline
 YearsInCurrentRole         &  9.063045e-17 \\ \hline
 YearsSinceLastPromotion    &  1.208406e-18 \\ \hline
+YearsWithCurrManager      & -2.779334e-17 \\ \hline
 \end{tabular}
 \caption{Media de cada variable estandarizada}
 \end{table}
@@ -38,15 +37,14 @@ cerca de 0 (por ejemplo, entre -1e-17 y 1e-18).
 \hline
 \textbf{Variable} & \textbf{Desviación Estándar} \\ \hline
 Age                        & 1.00034 \\ \hline
-DailyRate                  & 1.00034 \\ \hline
-HourlyRate                 & 1.00034 \\ \hline
+JobLevel                   & 1.00034 \\ \hline
 MonthlyIncome              & 1.00034 \\ \hline
-MonthlyRate                & 1.00034 \\ \hline
 NumCompaniesWorked         & 1.00034 \\ \hline
 TotalWorkingYears          & 1.00034 \\ \hline
 YearsAtCompany             & 1.00034 \\ \hline
 YearsInCurrentRole         & 1.00034 \\ \hline
 YearsSinceLastPromotion    & 1.00034 \\ \hline
+YearsWithCurrManager       & 1.00034 \\ \hline
 \end{tabular}
 \caption{Desviación estándar de cada variable estandarizada}
 \end{table}
@@ -62,6 +60,6 @@ Utilizando los datos estandarizados, se procede a calcular la matriz de correlac
 \end{figure}
 
 Podemos observar que la matriz de correlación es una matriz simétrica, 
-con valores en la diagonal principal iguales a 1, aunque vemos que las variables
-DailyRate, HourlyRate, MonthlyRate y NumCompaniesWorked tienen una correlación cercana a 0
-lo que indica no hay una relación lineal fuerte entre esa una variable y otra en la matriz.
+con valores en la diagonal principal iguales a 1, aunque vemos que la variable NumCompaniesWorked 
+tienen una correlación cercana a 0 lo que indica no hay una relación lineal fuerte entre 
+esa una variable y las otras en la matriz.
