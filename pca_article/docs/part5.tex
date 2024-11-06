@@ -1,8 +1,60 @@
 \newpage
 \section{Preguntas adicionales}
-\subsection{Enunciado}
-¿Qué transformación de los datos es necesaria antes de aplicar PCA en Sklearn y por qué? 
-¿Cómo evaluarías si el PCA fue exitoso para reducir la dimensionalidad en tu conjunto de datos? 
-Si una variable presenta una correlación muy baja con todas las demás, ¿cómo afectará esto al PCA y qué acciones tomarías? 
-¿Qué problemas podrías encontrar si no limitas la cantidad de componentes principales a aquellos que expliquen una cantidad significativa de la varianza? 
-¿Cómo podrías usar los resultados del PCA para mejorar un proceso dentro de tu empresa? 
+\begin{enumerate}
+    \item \textbf{¿Qué transformación de los datos es necesaria antes de aplicar PCA en Sklearn y por qué?}
+
+    Previo a analizar los datos en Sklearn tenemos que realizar las siguientes tareas:
+    \begin{itemize}
+        \item Estandarización o normalización de datos.
+        \item Tratamiento de valores faltantes.
+        \item Verificación de linearidad.
+    \end{itemize}
+
+    Aplicar estas transformaciones es esencial para asegurar que el PCA capture correctamente la estructura de
+    los datos y ofrezca resultados significativos.
+
+    \item \textbf{¿Cómo evaluarías si el PCA fue exitoso para reducir la dimensionalidad en tu conjunto de datos?}
+
+    Podemos determinar el éxito del PCA en la reducción de la dimensionalidad de los datos mediante la:
+    \begin{itemize}
+        \item Varianza explicada por cada componente principal.
+        \item Rendimiento de un modelo supervisado.
+        \item Reducción en el tiempo de procesamiento.
+        \item Comparación de distancias o relaciones entre puntos.
+    \end{itemize}
+
+    \item \textbf{Si una variable presenta una correlación muy baja con todas las demás, ¿cómo afectará esto al PCA y qué acciones tomarías?}
+
+    Su impacto en el PCA puede ser limitado, pero podría tener efectos en la interpretación de los componentes
+    principales y en la eficiencia del modelo.
+
+    Acciones que podríamos tomar:
+    \begin{itemize}
+        \item Eliminar la variable del análisis.
+        \item Realizar un análisis de correlación más detallado.
+        \item Realizar un análisis de componentes principales sin la variable.
+    \end{itemize}
+
+    \item \textbf{¿Qué problemas podrías encontrar si no limitas la cantidad de componentes principales a aquellos que expliquen una cantidad significativa de la varianza?}
+
+    Al no limitar la cantidad de componentes principales podríamos enfrentar problemas como:
+    \begin{itemize}
+        \item Sobreajuste del modelo.
+        \item Pérdida de interpretabilidad.
+        \item Aumento de la complejidad computacional.
+        \item Pérdida de generalización.
+        \item Ruido en los datos transformados.
+    \end{itemize}
+
+    \item \textbf{¿Cómo podrías usar los resultados del PCA para mejorar un proceso dentro de tu empresa?}
+
+    En este caso en particular para mejorar un proceso de recursos humanos con PCA podríamos:
+    \begin{itemize}
+        \item Identificación de factores clave de deserción.
+        \item Segmentación de empleados en riesgo de deserción.
+        \item Evaluación del impacto de las iniciativas de retención.
+        \item Identificación de puntos críticos de mejora organizacional.
+        \item Planificación de carrera y desarrollo profesional.
+        \item Predicción de la rotación de empleados.
+    \end{itemize}
+\end{enumerate}
