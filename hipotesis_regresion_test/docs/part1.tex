@@ -20,3 +20,62 @@ H1: Existe una diferencia significativa en la media de ventas entre los dos equi
 Usa un nivel de significancia de \( \alpha = 0.05 \)
 \\
 Compara los resultados de ambas muestras e interpreta el p-valor para tomar una decisión informada.
+
+\subsection{Muestra}
+Nosotros tomamos un dataset que se enfoca en el análisis satisfación de empleados \cite{ibm-hr} y
+análisis de deserción de empleados, dentro de nuestro grupo de empleados en el dataset tenemos
+empleados en industrias de:
+\begin{itemize}
+    \item Recursos Humanos
+    \item Investigación y Desarrollo
+    \item Ventas
+\end{itemize}
+Para el propósito de esta prueba, y como se entiende, lo que se quiere es analizar y comparar
+2 equipos de un mismo sector en particular, por lo que se tomará el sector de
+\textbf{Investigación y Desarrollo}.
+
+Para esto entonces, vamos a evaluar: \textbf{Satisfacción de empleados de nivel de senior 1 y 5,
+para los empleados de Investigación y Desarrollo}.
+
+Como organizamos ambos grupos de investigación:
+
+\begin{lstlisting}[language=Python]
+import pandas as pd
+
+df = pd.read_csv("sample_data/HR Employee Attrition.csv")
+
+DEPARTMENT = "Research & Development"
+GROUP_SENIOR_1 = 1
+GROUP_SENIOR_2 = 5
+
+satisfaction_group_1 = df.loc[(df['Department'] == DEPARTMENT) & (df['JobLevel'] == GROUP_SENIOR_1), 'JobSatisfaction']
+satisfaction_group_2 = df.loc[(df['Department'] == DEPARTMENT) & (df['JobLevel'] == GROUP_SENIOR_2),  'JobSatisfaction']
+\end{lstlisting}
+
+\subsection{Prueba T}
+
+\begin{lstlisting}[language=Python]
+import scipy.stats as stats
+
+t_stat, p_valor = stats.ttest_ind(satisfaction_group_1, satisfaction_group_2)
+
+print(f"Estadístico t: {t_stat:.4f}")
+print(f"Valor p: {p_valor:.4f}")
+
+# Decisión basada en el p-valor
+alpha = 0.05
+if p_valor < alpha:
+    print("Rechazamos la hipótesis nula: Existe una diferencia significativa en la media de ventas entre los dos equipos.")
+else:
+    print("No rechazamos la hipótesis nula: No hay diferencia en la media de ventas entre los dos equipos.")    
+\end{lstlisting}
+
+
+\subsection{Resultados}
+Una vez realizado el cálculo de la prueba t, obtenemos los siguientes resultados:
+
+\textbf{Estadístico t: -0.0118}
+\\
+\textbf{Valor p: 0.9906}
+\\
+\textbf{No rechazamos la hipótesis nula: No hay diferencia en la media de ventas entre los dos equipos.}
