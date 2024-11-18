@@ -59,15 +59,15 @@ import scipy.stats as stats
 
 t_stat, p_valor = stats.ttest_ind(satisfaction_group_1, satisfaction_group_2)
 
-print(f"Estadístico t: {t_stat:.4f}")
+print(f"Estadistico t: {t_stat:.4f}")
 print(f"Valor p: {p_valor:.4f}")
 
-# Decisión basada en el p-valor
+# Decision basada en el p-valor
 alpha = 0.05
 if p_valor < alpha:
-    print("Rechazamos la hipótesis nula: Existe una diferencia significativa en la media de ventas entre los dos equipos.")
+    print("Rechazamos la hipotesis nula: Existe una diferencia significativa en la media de ventas entre los dos equipos.")
 else:
-    print("No rechazamos la hipótesis nula: No hay diferencia en la media de ventas entre los dos equipos.")    
+    print("No rechazamos la hipotesis nula: No hay diferencia en la media de ventas entre los dos equipos.")    
 \end{lstlisting}
 
 
