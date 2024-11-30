@@ -1,0 +1,151 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/apasortcite//global/global}
+    \entry{asana_planning_poker}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ae22becbf547df5d94867f034c1a6ce2}{%
+           family={Asana},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{fullhash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{bibnamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authorbibnamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authornamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authorfullhash}{ae22becbf547df5d94867f034c1a6ce2}
+      \field{extraname}{1}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido en noviembre de 2024}
+      \field{title}{¿Qué es el Planning Poker?}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://asana.com/es/resources/planning-poker
+      \endverb
+      \verb{url}
+      \verb https://asana.com/es/resources/planning-poker
+      \endverb
+    \endentry
+    \entry{asana_story_points}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ae22becbf547df5d94867f034c1a6ce2}{%
+           family={Asana},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{fullhash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{bibnamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authorbibnamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authornamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authorfullhash}{ae22becbf547df5d94867f034c1a6ce2}
+      \field{extraname}{2}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido en noviembre de 2024}
+      \field{title}{¿Qué son los puntos de historia?}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://asana.com/es/resources/story-points
+      \endverb
+      \verb{url}
+      \verb https://asana.com/es/resources/story-points
+      \endverb
+    \endentry
+  \enddatalist
+  \datalist[entry]{apa/global//global/global}
+    \entry{asana_planning_poker}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ae22becbf547df5d94867f034c1a6ce2}{%
+           family={Asana},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{fullhash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{bibnamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authorbibnamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authornamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authorfullhash}{ae22becbf547df5d94867f034c1a6ce2}
+      \field{extraname}{1}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido en noviembre de 2024}
+      \field{title}{¿Qué es el Planning Poker?}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://asana.com/es/resources/planning-poker
+      \endverb
+      \verb{url}
+      \verb https://asana.com/es/resources/planning-poker
+      \endverb
+    \endentry
+    \entry{asana_story_points}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ae22becbf547df5d94867f034c1a6ce2}{%
+           family={Asana},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{fullhash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{bibnamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authorbibnamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authornamehash}{ae22becbf547df5d94867f034c1a6ce2}
+      \strng{authorfullhash}{ae22becbf547df5d94867f034c1a6ce2}
+      \field{extraname}{2}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accedido en noviembre de 2024}
+      \field{title}{¿Qué son los puntos de historia?}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://asana.com/es/resources/story-points
+      \endverb
+      \verb{url}
+      \verb https://asana.com/es/resources/story-points
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
