@@ -1,0 +1,53 @@
+\documentclass[a4paper,12pt]{article}
+
+% Paquetes necesarios
+\usepackage[utf8]{inputenc}   % Codificación UTF-8
+\usepackage{fontspec} % Paquete para manejar fuentes específicas
+\usepackage[spanish]{babel}
+\usepackage[style=apa, backend=biber]{biblatex}
+\usepackage{geometry}         % Configuración de márgenes
+\usepackage{graphicx}
+\usepackage{setspace}         % Configuración de interlineado
+\usepackage{fancyhdr}         % Configuración de encabezados y pie de página
+
+\setmainfont{Arial}   % Configura Arial como la fuente principal
+\geometry{
+    top=2.5cm,
+    bottom=2.5cm,
+    left=4cm,
+    right=2.5cm
+}
+\pagestyle{fancy}
+% Configuración del interlineado y espacio entre párrafos
+\setlength{\parskip}{2em}  % Espacio doble entre párrafos
+\setlength{\parindent}{0em} % Sin sangría en párrafos
+\onehalfspacing            % Interlineado de 1.5
+% Configuración del pie de página
+\fancyhf{}
+\fancyfoot[R]{\thepage}    % Número de página en la esquina inferior derecha
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[R]{\thepage}
+}
+
+
+\addbibresource{bibliography.bib} % Archivo .bib con las referencias
+
+
+
+\begin{document}
+
+% Incluir la portada
+\include{docs/portada.tex} % Reemplaza con \include{portada} si prefieres que se trate como una sección independiente
+
+% Table of contents
+\newpage
+\tableofcontents
+\listoffigures
+
+\include{docs/introduction.tex}
+\input{docs/antecedentes.tex}
+
+\printbibliography
+
+\end{document}

@@ -1,0 +1,28 @@
+{
+    "folders": [
+        {
+            "path": "../../big-data-articles",
+            "name": "maestria"
+        }
+    ],
+    "settings": {
+        "latex-workshop.view.pdf.viewer": "tab",
+
+        // Configuración para archivos PDF
+        "files.associations": {
+            "*.tex": "latex",
+            "*.sty": "latex"
+        },
+        "editor.wordWrap": "on",
+
+        // Excluir archivos innecesarios del explorador
+        "files.exclude": {
+            "**/.git": true,
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "James-Yu.latex-workshop"
+        ]
+    }
+}
