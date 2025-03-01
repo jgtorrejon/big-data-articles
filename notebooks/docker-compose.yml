@@ -6,7 +6,7 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./:/opt/notebooks
+      - .:/opt/notebooks
     environment:
       - JUPYTER_ENABLE_LAB=yes
     command: >
