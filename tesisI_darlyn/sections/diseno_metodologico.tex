@@ -1,0 +1,210 @@
+\chapter{Diseño Metodológico}
+\section{Delimitación de la Investigación}
+
+\subsection{Delimitación Temática}
+
+La presente investigación se circunscribe al análisis y solución del problema relacionado con el acceso a la documentación técnica y de negocio en entornos digitales, específicamente en la plataforma Confluence utilizada por la empresa Airnguru S.A. El trabajo se centra en el desarrollo de un chatbot semántico multiperfil, aplicando técnicas de procesamiento de lenguaje natural y recuperación de información contextualizada, sin abordar aspectos de evaluación comparativa ni métricas de impacto en productividad organizacional.
+
+\subsection{Delimitación Espacial}
+
+El estudio se lleva a cabo en la empresa Airnguru S.A., con sede operativa en la ciudad de Santa Cruz de la Sierra, Bolivia. El análisis se limita al entorno interno de esta organización, particularmente en lo que respecta al uso de su sistema de documentación interna alojado en Confluence, y a los perfiles de usuarios que interactúan con dicha documentación, incluyendo desarrolladores de software y product managers.
+
+\subsection{Delimitación Temporal}
+
+La investigación se desarrollará durante la gestión académica 2025, comprendiendo la etapa de diagnóstico, implementación y documentación del sistema propuesto. El trabajo se enmarca en el tiempo definido por el calendario académico de la Maestría en Inteligencia Artificial y Data Science de la Facultad de Ingeniería en Ciencias de la Computación y Telecomunicaciones de la Universidad Privada de Santa Cruz de la Sierra.
+
+
+\section{Definición Conceptual de las Variables}
+
+En la definición Implementación de un chatbot semántico multiperfil basado en PLN El término \textit{chatbot} se refiere a un sistema computacional que interactúa con los usuarios mediante lenguaje natural, simulando una conversación humana con fines informativos, operativos o de asistencia. Los chatbots semánticos, en particular, se apoyan en técnicas de procesamiento de lenguaje natural (PLN) para interpretar la intención del usuario y generar respuestas contextualizadas y relevantes (Jurafsky \& Martin, 2021).
+El enfoque multiperfil implica que el sistema debe adaptarse a distintos tipos de usuarios con necesidades diferenciadas, como desarrolladores y product managers. El diseño de este tipo de herramientas requiere una arquitectura modular, capaz de integrar modelos semánticos, motores de búsqueda, bases de conocimiento y una interfaz conversacional amigable (McTear, 2017).
+
+
+Acceso contextualizado y eficiente a la documentación técnica y de negocio se entiende por acceso contextualizado a la capacidad de los usuarios para obtener información relevante considerando su perfil, el contexto de uso y el contenido de la consulta. La eficiencia del acceso se relaciona con la rapidez, precisión y claridad con que se recupera la información deseada. Según Davenport y Prusak (1997), una gestión eficaz del conocimiento organizacional depende, en gran medida, de la disponibilidad de información útil en el momento oportuno.
+En este estudio, la documentación técnica hace referencia al contenido relacionado con código, arquitectura de sistemas y procesos internos, mientras que la documentación de negocio incluye términos, configuraciones, glosarios y directrices provenientes del dominio aeronáutico, como las estructuras de datos de ATPCO o nomenclaturas como \textit{fareclass} o \textit{record1}. La contextualización semántica permite mejorar la experiencia de búsqueda y reducir las barreras de comprensión, especialmente en dominios especializados (Morville, 2006).
+
+
+\section{Definición Operacional de las Variables}
+
+Implementación de un chatbot semántico multiperfil basado en PLN, desde una perspectiva operativa, esta variable se materializa en el desarrollo de una solución tecnológica que integra diversas técnicas y herramientas. El chatbot será programado utilizando bibliotecas de procesamiento de lenguaje natural (como spaCy o transformers), con capacidad para interpretar preguntas en lenguaje natural, identificar la intención del usuario y recuperar información relevante desde la base documental de Confluence.
+La implementación abarcará módulos como: un clasificador de intención, un sistema de extracción semántica, un motor de búsqueda en lenguaje natural y una interfaz de conversación amigable. El desarrollo seguirá principios de modularidad, escalabilidad y adaptabilidad, para permitir que tanto desarrolladores como product managers puedan acceder a contenido técnico o de negocio según sus necesidades particulares.
+
+Acceso contextualizado y eficiente a la documentación técnica y de negocio, operativamente, esta variable se reflejará en la forma en que los usuarios interactúan con el chatbot y obtienen respuestas útiles, rápidas y contextualizadas. La eficiencia será evaluada a partir de la reducción en el tiempo de búsqueda de documentación, la capacidad del sistema de entregar respuestas correctas y el nivel de comprensión que facilita a usuarios de distintos perfiles.
+En mi criterio, esta variable es crucial porque traduce directamente el propósito del proyecto en términos funcionales. Un acceso más contextualizado no solo mejora la productividad, sino que también reduce la dependencia de expertos y permite una transferencia de conocimiento más ágil dentro del equipo. La variable será observada a través de pruebas funcionales internas y análisis cualitativo de los flujos de interacción.
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{4cm}|p{5cm}|p{6cm}|}
+\hline
+\textbf{Variable} & \textbf{Dimensiones} & \textbf{Indicadores} \\
+\hline
+\textbf{Implementación de un chatbot semántico multiperfil basado en PLN} & 
+\begin{itemize}
+  \item Modelado conversacional
+  \item Adaptación por perfiles
+  \item Integración con documentación
+  \item Uso de técnicas de PLN
+\end{itemize} &
+\begin{itemize}
+  \item Existencia de flujo de diálogo para diferentes roles
+  \item Estructura modular del sistema
+  \item Precisión en la recuperación semántica
+  \item Uso de herramientas de PLN (spaCy, transformers, etc.)
+\end{itemize} \\
+\hline
+
+\textbf{Acceso contextualizado y eficiente a la documentación técnica y de negocio} & 
+\begin{itemize}
+  \item Eficiencia de recuperación
+  \item Contextualización de la información
+  \item Comprensibilidad de los resultados
+\end{itemize} &
+\begin{itemize}
+  \item Tiempo de respuesta a consultas
+  \item Relevancia de las respuestas obtenidas
+  \item Nivel de comprensión de los usuarios sobre términos técnicos
+\end{itemize} \\
+\hline
+\end{tabular}
+\caption{Cuadro de Operacionalización de las Variables}
+\label{tab:operacionalizacion}
+\end{table}
+
+\section{Métodos de Investigación}
+
+Los métodos de investigación seleccionados combinan enfoques teóricos y empíricos para abordar de manera integral el problema identificado.
+
+\textbf{Método histórico-lógico:} Se empleará para comprender la evolución del acceso a documentación técnica en entornos de software y su relevancia actual en el sector aeronáutico.
+
+\textbf{Método inductivo-deductivo:} Permitirá establecer relaciones entre conceptos como procesamiento del lenguaje natural (PLN), recuperación semántica de información y productividad del equipo técnico.
+
+\textbf{Método de análisis-síntesis:} Ayudará a descomponer el fenómeno del acceso a la documentación técnica y proponer soluciones mediante la integración de tecnologías como embeddings semánticos y sistemas conversacionales.
+
+\textbf{Método hipotético-deductivo:} Se aplicará para formular y validar la hipótesis de que un chatbot semántico mejora el acceso a la documentación y reduce la curva de aprendizaje.
+
+Desde el nivel empírico:
+
+\textbf{Observación:} Se aplicará la observación directa del comportamiento de los desarrolladores al interactuar con la documentación y con el chatbot.
+
+\textbf{Encuesta:} Se recogerán percepciones, nivel de satisfacción y dificultades actuales mediante cuestionarios dirigidos a desarrolladores y líderes técnicos.
+
+\textbf{Entrevistas:} A expertos técnicos y usuarios clave para obtener información cualitativa profunda sobre sus experiencias y expectativas.
+
+\textbf{Revisión documental:} De la documentación técnica actual (Confluence, wikis, manuales internos) para entender su estructura, calidad y acceso.
+
+
+\section{Técnicas de Recolección de Datos}
+
+\textbf{Cuestionario:} De preguntas semicerradas para medir nivel de dificultad percibida, frecuencia de uso, y experiencia con el sistema actual.
+
+\textbf{Entrevista estructurada:} Con ingenieros clave para explorar limitaciones actuales y validar requerimientos para el chatbot.
+
+\textbf{Lista de chequeo documental:} Para identificar brechas, redundancias y problemas de actualización en la documentación existente.
+
+\textbf{Observación directa:} Del proceso de búsqueda de información técnica por parte de nuevos desarrolladores.
+
+\section{Instrumentos de Investigación}
+
+Los instrumentos que se aplicarán para recolectar la información son los siguientes:
+
+\textbf{Guía de observación:} Con criterios definidos para registrar patrones de uso y obstáculos en la consulta de documentación.
+
+\textbf{Cuestionario:} Estandarizado para capturar datos cuantitativos sobre usabilidad, accesibilidad y satisfacción del usuario.
+
+\textbf{Guía de entrevista:} Con preguntas predefinidas que aborden necesidades, barreras y percepciones sobre el acceso a información técnica.
+
+\textbf{Matriz de revisión documental:} Para evaluar exhaustividad, organización y consistencia semántica de los contenidos actuales.
+
+
+\section{Población y Muestra}
+
+\subsection{Población}
+
+La población objeto de estudio está conformada por los profesionales que utilizan y acceden de forma recurrente a la documentación técnica y de negocio en la empresa Airnguru S.A., en Santa Cruz de la Sierra. Esta población incluye desarrolladores de software, ingenieros de datos, product managers y personal técnico de soporte que interactúa directamente con el sistema Confluence. Todos ellos presentan las características necesarias para evaluar la problemática del acceso documental, y representan el universo completo de análisis para esta investigación.
+
+\subsection{Muestra}
+
+Debido a que el número total de individuos que componen esta población es reducido y accesible, se aplicará un \textbf{censo}, es decir, se recolectarán datos de todos los miembros de la población sin recurrir a técnicas de muestreo. Esta decisión permite obtener una visión completa del fenómeno de estudio, aumentar la precisión de los resultados y reducir el error muestral. El uso del censo es adecuado para estudios con enfoque cuantitativo cuando la población es manejable y está claramente delimitada.
+
+
+\subsection{Análisis de los Datos}
+
+El análisis de datos en esta investigación se realizará desde un enfoque cuantitativo y mediante la técnica del censo, ya que se pretende obtener información directa de toda la población objeto de estudio —los ingenieros y analistas que utilizan la plataforma Confluence en Airnguru S.A.— sin aplicar inferencias estadísticas extrapoladas.
+
+La información recogida a través de los instrumentos (cuestionarios estructurados con ítems de tipo Likert) será organizada, tabulada y procesada utilizando herramientas estadísticas descriptivas. Se calcularán frecuencias absolutas y relativas, medidas de tendencia central (media, moda) y medidas de dispersión (desviación estándar), con el fin de describir el comportamiento general de las variables en estudio.
+
+Posteriormente, se realizarán cruces entre variables dependientes e independientes para identificar correlaciones relevantes entre la percepción de utilidad del chatbot y la eficiencia en el acceso a la documentación. Este análisis permitirá validar la hipótesis planteada sobre la influencia del uso del chatbot en la mejora del acceso a la información técnica.
+
+Los resultados del análisis serán visualizados mediante gráficos de barras, histogramas y tablas de doble entrada, lo cual facilitará la interpretación de los hallazgos y su discusión en el capítulo de resultados. El software estadístico que se utilizará será SPSS o R, dependiendo de la disponibilidad institucional y la compatibilidad con los formatos de exportación de los instrumentos utilizados.
+
+Este proceso permitirá aportar evidencia empírica rigurosa para evaluar el impacto de la implementación del chatbot semántico en los procesos de búsqueda, comprensión y aplicación de la documentación técnica y de negocio dentro del entorno de Airnguru S.A.
+
+
+\subsection{Validación y Triangulación de los Datos}
+
+Para garantizar la fiabilidad y validez interna de los datos recolectados, se aplicarán mecanismos de control metodológico que permitan reducir el sesgo de medición. La validación del instrumento se realizará mediante una prueba piloto con un subconjunto representativo de la población objetivo, lo que permitirá identificar errores de redacción, ambigüedades o inconsistencias en los ítems del cuestionario.
+
+En cuanto a la triangulación, aunque el estudio se orienta principalmente bajo un enfoque cuantitativo, se incorporarán elementos complementarios cualitativos mediante entrevistas semiestructuradas a actores clave del proceso (líderes técnicos y jefes de producto). Esta triangulación metodológica permitirá enriquecer el análisis interpretativo y contrastar los resultados cuantitativos con percepciones cualitativas sobre la experiencia de acceso a la documentación técnica.
+
+La integración de ambos tipos de datos fortalecerá la comprensión del fenómeno en estudio, y aportará sustento empírico para validar la hipótesis planteada. Los hallazgos se cotejarán en la etapa final del análisis para identificar coincidencias, divergencias y posibles patrones emergentes relacionados con la implementación del chatbot semántico.
+
+
+\section{2.10 Cronograma de Investigación}
+
+A continuación, se representa mediante un diagrama de Grant la planificación, una
+aproximación tentativa del tiempo en que se desarrollará la investigación, mediante el cuadro que
+aparece a continuación, el cual está sujeto a modificaciones por imprevistos, o ajustes en la
+evolución de la investigación:
+
+\begin{table}[H]
+\centering
+\caption{Cronograma de investigación - Gestión 2025}
+\label{tab:cronograma_gantt}
+\resizebox{\textwidth}{!}{%
+\begin{ganttchart}[
+    hgrid,
+    vgrid,
+    time slot format=isodate-yearmonth,
+    time slot unit=month,
+    x unit=1.1cm,
+    y unit chart=0.8cm,
+    title/.append style={draw=none, fill=none},
+    title label font=\bfseries\footnotesize,
+    bar label font=\scriptsize,
+    bar height=0.5,
+    group label font=\bfseries\small,
+    group right shift=0,
+    group top shift=0.6,
+    group height=0.3,
+    group peaks tip position=0
+]{2025-01}{2025-12}
+
+    \gantttitlecalendar{year, month=shortname} \\
+
+    \ganttgroup{Planeación}{2025-01}{2025-03} \\
+    \ganttbar{Revisión bibliográfica}{2025-01}{2025-02} \\
+    \ganttbar{Diagnóstico institucional}{2025-02}{2025-03} \\
+    \ganttbar{Formulación del problema}{2025-02}{2025-03} \\
+
+    \ganttgroup{Diseño metodológico}{2025-03}{2025-05} \\
+    \ganttbar{Marco teórico}{2025-03}{2025-04} \\
+    \ganttbar{Diseño de instrumentos}{2025-04}{2025-05} \\
+    \ganttbar{Validación de instrumentos}{2025-05}{2025-05} \\
+
+    \ganttgroup{Trabajo de campo}{2025-06}{2025-07} \\
+    \ganttbar{Aplicación del censo}{2025-06}{2025-06} \\
+    \ganttbar{Recolección de datos}{2025-06}{2025-07} \\
+
+    \ganttgroup{Análisis y desarrollo}{2025-07}{2025-09} \\
+    \ganttbar{Procesamiento de datos}{2025-07}{2025-08} \\
+    \ganttbar{Desarrollo del prototipo}{2025-07}{2025-09} \\
+
+    \ganttgroup{Cierre de investigación}{2025-09}{2025-12} \\
+    \ganttbar{Redacción de capítulos finales}{2025-09}{2025-10} \\
+    \ganttbar{Revisión y ajustes}{2025-10}{2025-11} \\
+    \ganttbar{Presentación y defensa}{2025-11}{2025-12} \\
+
+\end{ganttchart}
+}
+\end{table}

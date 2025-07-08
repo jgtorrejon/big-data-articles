@@ -14,6 +14,8 @@
 \usepackage{graphicx}
 \usepackage{float} % para usar [H]
 \usepackage[style=apa,backend=biber,language=spanish]{biblatex}
+\usepackage{pgfgantt}
+
 \addbibresource{sections/bibliografia.bib}
 \DeclareLanguageMapping{spanish}{spanish-apa}
 
@@ -41,11 +43,20 @@
 % Índice
 \tableofcontents
 \newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
 
 % Introducción
 \input{sections/introduccion.tex}
 \input{sections/paradigma_enfoque.tex}
 \input{sections/planteamiento_problema.tex}
+\input{sections/hipotesis_a_defender.tex}
+\input{sections/objetivos_investigacion.tex}
+\input{sections/referentes_teoricos.tex}
+\input{sections/diseno_metodologico.tex}
+
 
 % Bibliografía
 \newpage
