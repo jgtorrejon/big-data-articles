@@ -317,3 +317,4 @@ TSWLatexianTemp*
 *id_rsa.pub
 .idea
 notebooks/files/*
+*.csv

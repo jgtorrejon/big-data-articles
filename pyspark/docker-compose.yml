@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  spark-master:
+    build: . # Construye la imagen desde el Dockerfile en este directorio
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+    ports:
+      - '8080:8080'
+      - '7077:7077'
+    volumes:
+      - ./apps:/opt/bitnami/spark/apps
+      - ./data:/opt/bitnami/spark/data # Mapeo del directorio de datos
+  spark-worker:
+    build: . # Utiliza la misma imagen construida para el worker
+    container_name: spark-worker
+    depends_on:
+      - spark-master
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    volumes:
+      - ./apps:/opt/bitnami/spark/apps
+      - ./data:/opt/bitnami/spark/data # Mapeo del directorio de datos
