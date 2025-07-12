@@ -318,3 +318,4 @@ TSWLatexianTemp*
 .idea
 notebooks/files/*
 *.csv
+hadoop/ejercicio3-spark-hadoop/hadoop/*
