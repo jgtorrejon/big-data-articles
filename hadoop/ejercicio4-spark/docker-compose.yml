@@ -1,0 +1,39 @@
+services:
+  spark-master:
+    image: bitnami/spark:3.5
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+    ports:
+      - "8080:8080" # UI del master
+      - "7077:7077" # puerto RPC
+    volumes:
+      - ./data:/data
+  spark-worker-1:
+    image: bitnami/spark:3.5
+    container_name: spark-worker-1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=2g
+      - SPARK_WORKER_CORES=2
+    depends_on:
+      - spark-master
+    volumes:
+      - ./data:/data
+  park-notebook:
+    image: jupyter/pyspark-notebook:spark-3.5.0
+    container_name: spark-notebook
+    environment:
+    # Conecta el driver de PySpark al clúster externo
+      - SPARK_MASTER=spark://spark-master:7077
+      - SPARK_EXECUTOR_MEMORY=2g
+      - SPARK_DRIVER_MEMORY=1g
+    ports:
+      - "8888:8888" # Jupyter
+    volumes:
+      - ./notebooks:/home/jovyan/work
+      - ./data:/data
+    depends_on:
+      - spark-master
