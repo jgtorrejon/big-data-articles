@@ -319,3 +319,7 @@ TSWLatexianTemp*
 notebooks/files/*
 *.csv
 hadoop/ejercicio3-spark-hadoop/hadoop/*
+hadoop/ejercicio5-spark/hadoop/*
+hadoop/ejercicio5-spark/data/*
+hadoop/ejercicio6-spark/data/*
+*.ipynb_checkpoints**
