@@ -316,6 +316,14 @@ TSWLatexianTemp*
 *id_rsa
 *id_rsa.pub
 .idea
-notebooks/files/*
 *.csv
-hadoop/ejercicio3-spark-hadoop/hadoop/*
+*.png
+*.jpg
+hadoop/*/hadoop
+hadoop/*/data/*_model
+*.ipynb_checkpoints
+*/artifacts
+*/mlruns
+__pycache__
+*.xlsx
+.virtual_documents
