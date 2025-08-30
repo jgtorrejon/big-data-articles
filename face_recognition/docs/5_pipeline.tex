@@ -1,0 +1,26 @@
+\section{Pipeline}
+
+\begin{table}[H]
+\centering
+\caption{Pipeline de MLOps implementado en el proyecto}
+\label{tab:pipeline}
+\begin{tabularx}{\linewidth}{|X|X|X|}
+\toprule
+\textbf{Etapa} & \textbf{Descripción} & \textbf{Implementación / Evidencia} \\
+\midrule
+\small \textbf{Ingesta de Datos} & Descarga y organización del dataset UTKFace, con fallback a datos sintéticos para pruebas locales. & Script \texttt{download\_utkface.py} (descarga desde Kaggle, genera imágenes sintéticas). \\
+\midrule
+\small \textbf{Preparación de Datos} & Extracción de anotaciones de edad y género a partir de la convención de nombres de los archivos. & Script \texttt{prepare\_utkface.py} (genera archivo \texttt{labels.csv} con metadatos). \\
+\midrule
+\small \textbf{Entrenamiento} & Entrenamiento multitarea para edad (regresión) y género (clasificación) con MobileNetV2 preentrenada, dos fases: extracción de características y fine-tuning. & Script \texttt{training.py} (Keras + MLflow, logging de métricas, guardado de artefactos y exportación ONNX). \\
+\midrule
+\small \textbf{Seguimiento y Registro} & Registro de parámetros, métricas, curvas de entrenamiento, matriz de confusión y modelos en formato TensorFlow/ONNX. & \textbf{MLflow Tracking} y \textbf{MLflow Model Registry} en contenedor dedicado. \\
+\midrule
+\small \textbf{Testing} & Validación automatizada del correcto funcionamiento de los endpoints de inferencia. & Script \texttt{test\_api.py}. \\
+\midrule
+\small \textbf{Despliegue en Producción} & Arquitectura distribuida con Docker Compose: base de datos, MLflow, entorno de entrenamiento y API REST. & \texttt{docker-compose.yml} (contenedores \texttt{db}, \texttt{mlflow}, \texttt{trainer}, \texttt{face-api}). \\
+\midrule
+\small \textbf{Inferencia en la API} & API REST en FastAPI que recibe imágenes, conecta al Model Registry de MLflow, descarga el modelo con alias de producción y expone predicciones de edad y género. & Clase \texttt{FaceAnalyticsService} en \texttt{face-api} (carga dinámica de modelos, funciones de predicción y embeddings). \\
+\bottomrule
+\end{tabularx}
+\end{table}
