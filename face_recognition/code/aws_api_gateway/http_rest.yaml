@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  title: Maestria API
+  version: "v1.0.0-beta"
+  description: Definition for Maestria API
+  termsOfService: "http://example.com/terms/"
+  contact:
+    name: API Support
+    email: contact@bpdarlyn.com
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+servers:
+  - url: https://api.maestria.{stage}.{hosted_zone}
+    variables:
+      stage:
+        default: prod
+        description: API Stage
+      hosted_zone:
+        default: nylrad.com
+        description: Default Hosted
+paths:
+  /{version}/example_url/say_hello:
+    post:
+      tags:
+        - maestria
+      summary: Say Hello
+      description: Api for say hello using lambda and api gateway
+      parameters:
+        - $ref: "#/components/parameters/version"
+      requestBody:
+        description: 'Body to get response'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+      responses:
+        "200":
+          description: 'Response for Set Webhook'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        "400":
+          $ref: "#/components/responses/ClientSideGeneralError"
+        "500":
+          $ref: "#/components/responses/ServerSideGeneralError"
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri:
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ExampleLambdaFunction.Arn}/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+
+components:
+  parameters:
+    version:
+      name: version
+      in: path
+      description: API version
+      required: true
+      schema:
+        type: string
+  responses:
+    ClientSideGeneralError:
+      description: Client side general error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OperationError"
+    ServerSideGeneralError:
+      description: Server side general error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OperationError"
+  schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: XXX
+        title:
+          type: string
+          example: Error processing something
+        details:
+          type: string
+          example: Error details
+      required:
+        - code
+        - message
+    Meta:
+      type: object
+      required:
+        - module
+        - version
+      properties:
+        module:
+          type: string
+          example: "maestria example"
+        version:
+          type: string
+          example: "v1"
+        integrationType:
+          type: string
+          example: "lambda"
+    OperationError:
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        errors:
+          type: array
+          items:
+            $ref: "#/components/schemas/Error"
