@@ -109,7 +109,7 @@
 %%\citestyle{acmauthoryear}
 \usepackage{tabularx}
 \usepackage{graphicx}
-\usepackage[spanish]{babel}
+% \usepackage[spanish]{babel}
 
 \newcommand{\staricon}[1]{
     \begin{tikzpicture}[scale=#1]
@@ -121,6 +121,30 @@
 %%
 %% end of the preamble, start of the body of the document source.
 \begin{document}
+\begin{abstract}
+El reconocimiento automático de rostros es un área de gran interés en visión por computadora, con aplicaciones
+que van desde la seguridad hasta la salud y la educación. Este trabajo presenta el desarrollo y puesta en
+producción de un modelo multitarea capaz de clasificar el género y estimar la edad a partir de imágenes
+faciales. Para ello se utilizó el dataset UTKFace, al cual se aplicaron procesos de limpieza, normalización
+y aumentos de datos con el fin de mejorar la calidad de entrenamiento. La arquitectura del modelo se basó en
+MobileNetV2, aprovechando el enfoque de transfer learning para equilibrar precisión y eficiencia computacional.\newline
+
+El entrenamiento se llevó a cabo en dos fases: una inicial de extracción de características y otra de ajuste
+fino, evaluadas mediante métricas de precisión (género) y error absoluto medio (edad). La gestión de
+experimentos y modelos se realizó con MLflow, lo que permitió un control sistemático y reproducible
+de resultados.\newline
+
+En cuanto al despliegue, se diseñó una arquitectura distribuida con contenedores Docker, que incluye base
+de datos, servidor de seguimiento, entorno de entrenamiento y una API REST desarrollada en FastAPI. Esta
+API integra directamente con el Model Registry de MLflow, asegurando que siempre se sirva la versión más
+reciente validada del modelo.\newline
+
+El proyecto no solo valida la factibilidad técnica del enfoque propuesto, sino que también resalta la
+importancia de las prácticas de MLOps para llevar soluciones de inteligencia artificial desde la
+experimentación hasta aplicaciones reales. De esta manera, se sientan bases sólidas para futuros trabajos
+que incorporen datasets más representativos y modelos especializados, contribuyendo a desarrollar
+sistemas robustos y útiles en contextos como el boliviano.
+\end{abstract}
 
 %%
 %% The "title" command has an optional parameter,
