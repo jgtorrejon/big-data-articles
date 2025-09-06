@@ -1,0 +1,38 @@
+\section{Datos}
+El proyecto utiliza como fuente principal el conjunto de datos \textbf{UTKFace},
+reconocido en la literatura por su aplicación en tareas de clasificación de género y 
+estimación de edad. Este dataset contiene aproximadamente 20.000 imágenes faciales en formato RGB con 
+dimensiones cercanas a 200×200 píxeles. 
+Cada archivo está anotado siguiendo el patrón \textit{edad\_género\_raza\_timestamp.jpg}, 
+lo que permite extraer de manera automática las etiquetas de edad (en años) y género (0 = femenino, 1 = masculino).
+
+\subsection{Fuente y Organización}
+La descarga y organización inicial del dataset se realizó con un script automatizado (\texttt{download\_utkface.py}), 
+que obtiene los archivos desde Kaggle y, en caso de fallo, genera un subconjunto sintético para pruebas rápidas. 
+Posteriormente, el script \texttt{prepare\_utkface.py} extrae las anotaciones y genera un archivo \texttt{labels.csv}, 
+que contiene de forma tabular las columnas \textit{filename}, \textit{age} y \textit{gender}.
+
+\subsection{Procesamiento y Transformaciones}
+Durante el proceso de preparación se aplicaron varias transformaciones para garantizar la calidad de los datos:
+
+\begin{itemize}
+  \item \textbf{Limpieza y filtrado}: se descartaron archivos que no cumplían con el patrón de nomenclatura o presentaban errores de lectura.
+  \item \textbf{Redimensionamiento}: las imágenes fueron escaladas a 160×160 píxeles, en concordancia con la entrada requerida por el modelo.
+  \item \textbf{Normalización}: los valores de píxeles fueron ajustados al rango [0,1] para estabilizar el entrenamiento.
+  \item \textbf{Data augmentation}: se aplicó un pipeline de aumentos ligeros mediante rotaciones, volteos, zoom, traslaciones, ajustes de contraste y correcciones aleatorias de gamma. Este esquema se implementó como una capa inicial dentro del modelo en Keras, garantizando variaciones adicionales de los datos en cada época de entrenamiento.
+\end{itemize}
+
+\subsection{Limitaciones}
+A pesar de su utilidad, el dataset presenta algunas limitaciones relevantes:
+
+\begin{itemize}
+  \item \textbf{Desbalance etario}: predominan ejemplos de edades jóvenes y adultas, mientras que los grupos etarios extremos están poco representados.
+  \item \textbf{Diversidad poblacional limitada}: UTKFace no refleja la composición étnica de la población boliviana, lo cual puede afectar la generalización del modelo.
+  \item \textbf{Posible ruido en las etiquetas}: la edad se infiere del nombre del archivo y no siempre corresponde a un dato verificado.
+\end{itemize}
+
+\subsection{Perspectiva Futura}
+Si bien UTKFace constituye la base de esta primera iteración, 
+se contempla la incorporación del dataset \textbf{QMUL-SurvFace} en futuros trabajos. 
+Dicho conjunto incluye imágenes en escenarios de vigilancia no controlada, lo que permitiría enriquecer 
+la robustez del sistema y acercar el modelo a contextos reales de aplicación.

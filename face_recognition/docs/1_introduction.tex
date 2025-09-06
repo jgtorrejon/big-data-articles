@@ -1,0 +1,32 @@
+\section{Introducción}
+
+El reconocimiento automático de rostros ha sido un campo ampliamente explorado en visión por computadora; sin embargo,
+su aplicación en contextos específicos sigue siendo un desafío técnico y socialmente relevante. En este proyecto nos
+enfocamos en el \textbf{análisis de atributos faciales}, en particular la \textbf{clasificación de género} y
+la \textbf{predicción de edad} a partir de imágenes de rostros. Si bien el término ``detección de rostros'' abarca
+múltiples líneas de investigación, hemos acotado el problema hacia un enfoque de clasificación y regresión dentro
+de un mismo modelo, buscando así una solución más concreta y alcanzable en el marco de este módulo.\newline
+
+En el \textbf{contexto boliviano}, este tipo de sistemas tiene diversas aplicaciones potenciales.
+Por ejemplo, podrían emplearse en entornos de \textbf{seguridad ciudadana}, apoyando a sistemas
+de control de accesos o cámaras de videovigilancia mediante la extracción de metadatos demográficos
+básicos. Asimismo, pueden ser útiles en áreas de \textbf{salud y educación}, donde la estimación
+automática de la edad podría facilitar la detección temprana de irregularidades en registros
+poblacionales o en la provisión de servicios diferenciados por rango etario. Estos casos de uso,
+aunque aún preliminares, demuestran que contar con un modelo robusto de clasificación y predicción
+facial puede constituirse en un componente fundamental para futuros proyectos de visión por computadora.\newline
+
+La elección de \textbf{deep learning} como enfoque metodológico se justifica en virtud de la complejidad
+inherente al problema. Las características faciales presentan gran variabilidad debido a factores como
+iluminación, ángulo de captura, expresiones faciales y diversidad étnica. Los modelos tradicionales de
+aprendizaje automático suelen tener dificultades para manejar estas variaciones; en contraste,
+las \textbf{redes neuronales profundas} permiten aprender representaciones jerárquicas de alto nivel
+directamente desde los datos, logrando así un desempeño significativamente superior en tareas de clasificación
+y regresión basadas en imágenes.\newline
+
+De manera preliminar, los experimentos realizados muestran que es factible entrenar un único modelo con
+dos salidas: una para la clasificación de género y otra para la predicción de edad. Este
+enfoque \textbf{multitarea} no solo optimiza el uso de los recursos computacionales, sino que también
+abre la posibilidad de extender el trabajo hacia otros atributos faciales en futuros proyectos académicos,
+particularmente en la asignatura de visión por computadora que se encuentra pendiente en el plan de estudios
+de nuestra maestría.\newline

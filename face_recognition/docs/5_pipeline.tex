@@ -1,0 +1,24 @@
+\section{Pipeline}
+
+\begin{itemize}
+    \item \textbf{Ingesta de Datos}: Descarga y organización del dataset UTKFace, con fallback a datos sintéticos para pruebas locales.\\
+    	extit{Implementación:} Script \texttt{download\_utkface.py} (descarga desde Kaggle, genera imágenes sintéticas).
+
+    \item \textbf{Preparación de Datos}: Extracción de anotaciones de edad y género a partir de la convención de nombres de los archivos.\\
+    	extit{Implementación:} Script \texttt{prepare\_utkface.py} (genera archivo \texttt{labels.csv} con metadatos).
+
+    \item \textbf{Entrenamiento}: Entrenamiento multitarea para edad (regresión) y género (clasificación) con MobileNetV2 preentrenada, dos fases: extracción de características y fine-tuning.\\
+    	extit{Implementación:} Script \texttt{training.py} (Keras + MLflow, logging de métricas, guardado de artefactos y exportación ONNX).
+
+    \item \textbf{Seguimiento y Registro}: Registro de parámetros, métricas, curvas de entrenamiento, matriz de confusión y modelos en formato TensorFlow/ONNX.\\
+    	extit{Implementación:} \textbf{MLflow Tracking} y \textbf{MLflow Model Registry} en contenedor dedicado.
+
+    \item \textbf{Testing}: Validación automatizada del correcto funcionamiento de los endpoints de inferencia.\\
+    	extit{Implementación:} Script \texttt{test\_api.py}.
+
+    \item \textbf{Despliegue en Producción}: Arquitectura distribuida con Docker Compose: base de datos, MLflow, entorno de entrenamiento y API REST.\\
+    	extit{Implementación:} \texttt{docker-compose.yml} (contenedores \texttt{db}, \texttt{mlflow}, \texttt{trainer}, \texttt{face-api}).
+
+    \item \textbf{Inferencia en la API}: API REST en FastAPI que recibe imágenes, conecta al Model Registry de MLflow, descarga el modelo con alias de producción y expone predicciones de edad y género.\\
+    	extit{Implementación:} Clase \texttt{FaceAnalyticsService} en \texttt{face-api} (carga dinámica de modelos, funciones de predicción y embeddings).
+\end{itemize}

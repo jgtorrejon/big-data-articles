@@ -1,0 +1,33 @@
+\section{Métodos}
+
+El enfoque propuesto se basa en un modelo de \textbf{aprendizaje profundo multitarea}, diseñado para resolver simultáneamente la estimación de edad (regresión) y la clasificación de género (clasificación binaria). La arquitectura aprovecha el paradigma de \textit{transfer learning}, utilizando como base una red preentrenada en ImageNet y añadiendo cabezales especializados para cada tarea.
+
+\subsection{Arquitectura del modelo}
+La red está compuesta por tres bloques principales:
+\begin{itemize}
+  \item \textbf{Bloque de aumento de datos}: implementado como una capa secuencial en Keras que aplica transformaciones ligeras (volteos horizontales, rotaciones, zoom, traslaciones, ajustes de contraste y variaciones aleatorias de gamma). Este componente mejora la capacidad de generalización del modelo frente a condiciones no controladas de captura de imágenes.
+  \item \textbf{Bloque de extracción de características}: se emplea \textbf{MobileNetV2} como \textit{backbone}, con pesos iniciales de ImageNet. Esta arquitectura fue seleccionada por su eficiencia computacional y bajo número de parámetros, lo que la hace adecuada para despliegue en entornos con recursos limitados.
+  \item \textbf{Bloque de predicción multitarea}: tras una capa de \textit{Global Average Pooling} y \textit{Dropout}, se añaden dos salidas: una capa densa lineal para la predicción de edad (pérdida: \texttt{MAE}), y una capa densa sigmoide para la clasificación de género (pérdida: \texttt{binary\_crossentropy}).
+\end{itemize}
+
+\subsection{Entrenamiento y optimización}
+El proceso de entrenamiento se realizó en dos fases:
+\begin{enumerate}
+  \item \textbf{Fase de extracción de características}: el backbone MobileNetV2 permaneció congelado, entrenando únicamente las capas superiores añadidas. Se utilizó el optimizador Adam con tasa de aprendizaje $1\mathrm{e}{-3}$, aplicando \textit{early stopping} para prevenir sobreajuste.
+  \item \textbf{Fase de ajuste fino (fine-tuning)}: se descongelaron las últimas 20 capas del backbone, reduciendo la tasa de aprendizaje a $1\mathrm{e}{-4}$ para permitir una adaptación gradual de los pesos preentrenados al dominio de rostros.
+\end{enumerate}
+
+Las métricas principales utilizadas fueron \textbf{accuracy} para la tarea de género y \textbf{MAE} (Mean Absolute Error) para la predicción de edad. El entrenamiento se realizó en lotes de tamaño 32 durante un máximo de 16 épocas, con división de validación del 10\% sobre el dataset.
+
+\subsection{Gestión de experimentos}
+Para el seguimiento de experimentos y control de versiones de modelos se empleó \textbf{MLflow}. En cada ejecución se registraron parámetros de entrenamiento, métricas de desempeño y artefactos asociados (curvas de aprendizaje, matriz de confusión y exportación del modelo en formato ONNX). Este enfoque permitió comparar la fase inicial de entrenamiento con la etapa de fine-tuning, así como almacenar los resultados de forma reproducible.
+
+\subsection{Alternativas consideradas}
+Si bien MobileNetV2 fue seleccionado por su balance entre precisión y eficiencia, se consideran varias alternativas para futuras iteraciones:
+\begin{itemize}
+  \item \textbf{EfficientNet}: por su capacidad de escalar en profundidad y resolución con menor costo computacional.
+  \item \textbf{ResNet-50}: ampliamente utilizada en reconocimiento facial, aunque con mayor carga de parámetros.
+  \item \textbf{Modelos específicos para estimación de edad}: arquitecturas diseñadas para tareas demográficas que podrían mejorar el desempeño en la predicción de edades extremas.
+\end{itemize}
+
+Este planteamiento metodológico asegura una base sólida para abordar el problema de clasificación de género y estimación de edad, al tiempo que sienta las bases para futuras mejoras y experimentación en escenarios más desafiantes.
