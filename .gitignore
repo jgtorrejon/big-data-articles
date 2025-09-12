@@ -328,3 +328,6 @@ __pycache__
 *.xlsx
 .virtual_documents
 .dvc/config
+
+*.txt
+*.xml
