@@ -332,4 +332,5 @@ __pycache__
 .dvc/config
 
 *.txt
+!requirements.txt
 *.xml
