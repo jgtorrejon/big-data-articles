@@ -334,3 +334,7 @@ __pycache__
 *.txt
 !requirements.txt
 *.xml
+*.avi
+*.pt
+*.caffemodel
+*/proyecto_yolo/runs/*
