@@ -4,3 +4,4 @@ numpy
 ipykernel
 ultralytics
 roboflow
+transformers

@@ -338,3 +338,5 @@ __pycache__
 *.pt
 *.caffemodel
 */proyecto_yolo/runs/*
+modelos_generativos/data/*
+*.wav
