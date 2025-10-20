@@ -1,0 +1,729 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/apasortcite//global/global/global}
+    \entry{atpco2022}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=32591408006040d8327be012ebc0926a}{%
+           family={{Airline Tariff Publishing Company}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{32591408006040d8327be012ebc0926a}
+      \strng{fullhash}{32591408006040d8327be012ebc0926a}
+      \strng{fullhashraw}{32591408006040d8327be012ebc0926a}
+      \strng{bibnamehash}{32591408006040d8327be012ebc0926a}
+      \strng{authorbibnamehash}{32591408006040d8327be012ebc0926a}
+      \strng{authornamehash}{32591408006040d8327be012ebc0926a}
+      \strng{authorfullhash}{32591408006040d8327be012ebc0926a}
+      \strng{authorfullhashraw}{32591408006040d8327be012ebc0926a}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Disponible en: https://www.atpco.net/resources/documentation}
+      \field{note}{Consultado el 7 de junio de 2025}
+      \field{title}{ATPCO Data Application Guide}
+      \field{year}{2022}
+    \endentry
+    \entry{davenport1997working}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=418715aadaf08f606ff3e5575fa44f4f}{%
+           family={Davenport},
+           familyi={D\bibinitperiod},
+           given={Thomas\bibnamedelima H.},
+           giveni={T\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=704c04d20dbd514c7c55ca25e19d816a}{%
+           family={Prusak},
+           familyi={P\bibinitperiod},
+           given={Laurence},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Harvard Business Press}%
+      }
+      \strng{namehash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{fullhash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{fullhashraw}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{bibnamehash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{authorbibnamehash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{authornamehash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{authorfullhash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{authorfullhashraw}{77c0a2a49249426e7571aa3c423e9fc9}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Working Knowledge: How Organizations Manage What They Know}
+      \field{year}{1997}
+    \endentry
+    \entry{ficct2022lineas}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f1fc7ea4d33d872c9d61283aea0f42df}{%
+           family={Ingeniería\bibnamedelimb en\bibnamedelimb Ciencias\bibnamedelimb de\bibnamedelimb la\bibnamedelimb Computación\bibnamedelimb y\bibnamedelima Telecomunicaciones},
+           familyi={I\bibinitperiod\bibinitdelim e\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim l\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim y\bibinitperiod\bibinitdelim T\bibinitperiod},
+           given={Facultad},
+           giveni={F\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+      }
+      \strng{namehash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{fullhash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{fullhashraw}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{bibnamehash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{authorbibnamehash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{authornamehash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{authorfullhash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{authorfullhashraw}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \field{sortinit}{d}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Universidad Autónoma Gabriel René Moreno}
+      \field{title}{Áreas, objetivos, líneas y ejes temáticos de investigación UPG - FICCT}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://www.ficct.uagrm.edu.bo
+      \endverb
+      \verb{url}
+      \verb https://www.ficct.uagrm.edu.bo
+      \endverb
+    \endentry
+    \entry{forward2002relevance}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=26cf9156ea9497c87906016e5040cfbb}{%
+           family={Forward},
+           familyi={F\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a487d817b6483086be1fa091a79e41dd}{%
+           family={Lethbridge},
+           familyi={L\bibinitperiod},
+           given={Timothy\bibnamedelima C.},
+           giveni={T\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{organization}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{fullhash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{fullhashraw}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{bibnamehash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{authorbibnamehash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{authornamehash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{authorfullhash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{authorfullhashraw}{61b144da3d027edbafcb3d60488a4c65}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the 2002 ACM symposium on Document engineering}
+      \field{title}{The relevance of software documentation, tools and technologies: a survey}
+      \field{year}{2002}
+      \field{pages}{26\bibrangedash 33}
+      \range{pages}{8}
+    \endentry
+    \entry{hearst2009search}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=45330e5d45157c38c5519d8cdb6cb1d8}{%
+           family={Hearst},
+           familyi={H\bibinitperiod},
+           given={Marti\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{fullhash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{fullhashraw}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{bibnamehash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{authorbibnamehash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{authornamehash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{authorfullhash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{authorfullhashraw}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Search User Interfaces}
+      \field{year}{2009}
+      \verb{urlraw}
+      \verb https://searchuserinterfaces.com/book/
+      \endverb
+      \verb{url}
+      \verb https://searchuserinterfaces.com/book/
+      \endverb
+    \endentry
+    \entry{jurafsky2023speech}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=bd33d7a70284b5ead9c7985cb5c9929c}{%
+           family={Jurafsky},
+           familyi={J\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9ed8bee488b2703da341cded66bf83cb}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={James\bibnamedelima H.},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Pearson}%
+      }
+      \strng{namehash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{fullhash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{fullhashraw}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{bibnamehash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{authorbibnamehash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{authornamehash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{authorfullhash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{authorfullhashraw}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3}
+      \field{title}{Speech and Language Processing}
+      \field{year}{2023}
+    \endentry
+    \entry{morville2006ambient}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e7f06f2b98c047d8c26a680d59bebe98}{%
+           family={Morville},
+           familyi={M\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly Media, Inc.}%
+      }
+      \strng{namehash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{fullhash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{fullhashraw}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{bibnamehash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{authorbibnamehash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{authornamehash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{authorfullhash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{authorfullhashraw}{e7f06f2b98c047d8c26a680d59bebe98}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Ambient Findability: What We Find Changes Who We Become}
+      \field{year}{2006}
+    \endentry
+    \entry{spinellis2006code}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=84b8e5364aab5f32e81e2aefc1cdb30a}{%
+           family={Spinellis},
+           familyi={S\bibinitperiod},
+           given={Diomidis},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley Professional}%
+      }
+      \strng{namehash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{fullhash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{fullhashraw}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{bibnamehash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{authorbibnamehash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{authornamehash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{authorfullhash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{authorfullhashraw}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Code Reading: The Open Source Perspective}
+      \field{year}{2006}
+    \endentry
+    \entry{sriraman2021semantic}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=ff85114a8df7b0cb1f569c5344fe00e2}{%
+           family={Sriraman},
+           familyi={S\bibinitperiod},
+           given={Manu},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6e3b44589ac9b08ce749fe11047670eb}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Jaspreet},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=111e0a5c009713efb9b738adcf8ac085}{%
+           family={Schulze},
+           familyi={S\bibinitperiod},
+           given={Julian},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9bfbc841af43915c12169734f59a4e7b}{%
+           family={Zimmermann},
+           familyi={Z\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{326c148ff42796b73be75c78b8b7526f}
+      \strng{fullhash}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \strng{fullhashraw}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \strng{bibnamehash}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \strng{authorbibnamehash}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \strng{authornamehash}{326c148ff42796b73be75c78b8b7526f}
+      \strng{authorfullhash}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \strng{authorfullhashraw}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2021 IEEE/ACM 43rd International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP)}
+      \field{title}{Semantic Search for Complex Software Engineering Artifacts: An Industrial Case Study}
+      \field{year}{2021}
+      \field{pages}{41\bibrangedash 50}
+      \range{pages}{10}
+    \endentry
+    \entry{white2016content}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7988598546b60ae5376580c33ef7cb20}{%
+           family={White},
+           familyi={W\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Rosenfeld Media}%
+      }
+      \strng{namehash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{fullhash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{fullhashraw}{7988598546b60ae5376580c33ef7cb20}
+      \strng{bibnamehash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{authorbibnamehash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{authornamehash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{authorfullhash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{authorfullhashraw}{7988598546b60ae5376580c33ef7cb20}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Content Strategy for Interfaces}
+      \field{year}{2016}
+    \endentry
+  \enddatalist
+  \datalist[entry]{apa/global//global/global/global}
+    \entry{atpco2022}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=32591408006040d8327be012ebc0926a}{%
+           family={{Airline Tariff Publishing Company}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{32591408006040d8327be012ebc0926a}
+      \strng{fullhash}{32591408006040d8327be012ebc0926a}
+      \strng{fullhashraw}{32591408006040d8327be012ebc0926a}
+      \strng{bibnamehash}{32591408006040d8327be012ebc0926a}
+      \strng{authorbibnamehash}{32591408006040d8327be012ebc0926a}
+      \strng{authornamehash}{32591408006040d8327be012ebc0926a}
+      \strng{authorfullhash}{32591408006040d8327be012ebc0926a}
+      \strng{authorfullhashraw}{32591408006040d8327be012ebc0926a}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Disponible en: https://www.atpco.net/resources/documentation}
+      \field{note}{Consultado el 7 de junio de 2025}
+      \field{title}{ATPCO Data Application Guide}
+      \field{year}{2022}
+    \endentry
+    \entry{davenport1997working}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=418715aadaf08f606ff3e5575fa44f4f}{%
+           family={Davenport},
+           familyi={D\bibinitperiod},
+           given={Thomas\bibnamedelima H.},
+           giveni={T\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=704c04d20dbd514c7c55ca25e19d816a}{%
+           family={Prusak},
+           familyi={P\bibinitperiod},
+           given={Laurence},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Harvard Business Press}%
+      }
+      \strng{namehash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{fullhash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{fullhashraw}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{bibnamehash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{authorbibnamehash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{authornamehash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{authorfullhash}{77c0a2a49249426e7571aa3c423e9fc9}
+      \strng{authorfullhashraw}{77c0a2a49249426e7571aa3c423e9fc9}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Working Knowledge: How Organizations Manage What They Know}
+      \field{year}{1997}
+    \endentry
+    \entry{ficct2022lineas}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f1fc7ea4d33d872c9d61283aea0f42df}{%
+           family={Ingeniería\bibnamedelimb en\bibnamedelimb Ciencias\bibnamedelimb de\bibnamedelimb la\bibnamedelimb Computación\bibnamedelimb y\bibnamedelima Telecomunicaciones},
+           familyi={I\bibinitperiod\bibinitdelim e\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim l\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim y\bibinitperiod\bibinitdelim T\bibinitperiod},
+           given={Facultad},
+           giveni={F\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+      }
+      \strng{namehash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{fullhash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{fullhashraw}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{bibnamehash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{authorbibnamehash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{authornamehash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{authorfullhash}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \strng{authorfullhashraw}{f1fc7ea4d33d872c9d61283aea0f42df}
+      \field{sortinit}{d}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Universidad Autónoma Gabriel René Moreno}
+      \field{title}{Áreas, objetivos, líneas y ejes temáticos de investigación UPG - FICCT}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://www.ficct.uagrm.edu.bo
+      \endverb
+      \verb{url}
+      \verb https://www.ficct.uagrm.edu.bo
+      \endverb
+    \endentry
+    \entry{forward2002relevance}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=26cf9156ea9497c87906016e5040cfbb}{%
+           family={Forward},
+           familyi={F\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a487d817b6483086be1fa091a79e41dd}{%
+           family={Lethbridge},
+           familyi={L\bibinitperiod},
+           given={Timothy\bibnamedelima C.},
+           giveni={T\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{organization}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{fullhash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{fullhashraw}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{bibnamehash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{authorbibnamehash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{authornamehash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{authorfullhash}{61b144da3d027edbafcb3d60488a4c65}
+      \strng{authorfullhashraw}{61b144da3d027edbafcb3d60488a4c65}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the 2002 ACM symposium on Document engineering}
+      \field{title}{The relevance of software documentation, tools and technologies: a survey}
+      \field{year}{2002}
+      \field{pages}{26\bibrangedash 33}
+      \range{pages}{8}
+    \endentry
+    \entry{hearst2009search}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=45330e5d45157c38c5519d8cdb6cb1d8}{%
+           family={Hearst},
+           familyi={H\bibinitperiod},
+           given={Marti\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{fullhash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{fullhashraw}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{bibnamehash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{authorbibnamehash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{authornamehash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{authorfullhash}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \strng{authorfullhashraw}{45330e5d45157c38c5519d8cdb6cb1d8}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Search User Interfaces}
+      \field{year}{2009}
+      \verb{urlraw}
+      \verb https://searchuserinterfaces.com/book/
+      \endverb
+      \verb{url}
+      \verb https://searchuserinterfaces.com/book/
+      \endverb
+    \endentry
+    \entry{jurafsky2023speech}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=bd33d7a70284b5ead9c7985cb5c9929c}{%
+           family={Jurafsky},
+           familyi={J\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9ed8bee488b2703da341cded66bf83cb}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={James\bibnamedelima H.},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Pearson}%
+      }
+      \strng{namehash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{fullhash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{fullhashraw}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{bibnamehash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{authorbibnamehash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{authornamehash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{authorfullhash}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \strng{authorfullhashraw}{b5e6a2accdc2023c51f42c6ec010d19b}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3}
+      \field{title}{Speech and Language Processing}
+      \field{year}{2023}
+    \endentry
+    \entry{morville2006ambient}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e7f06f2b98c047d8c26a680d59bebe98}{%
+           family={Morville},
+           familyi={M\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly Media, Inc.}%
+      }
+      \strng{namehash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{fullhash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{fullhashraw}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{bibnamehash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{authorbibnamehash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{authornamehash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{authorfullhash}{e7f06f2b98c047d8c26a680d59bebe98}
+      \strng{authorfullhashraw}{e7f06f2b98c047d8c26a680d59bebe98}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Ambient Findability: What We Find Changes Who We Become}
+      \field{year}{2006}
+    \endentry
+    \entry{spinellis2006code}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=84b8e5364aab5f32e81e2aefc1cdb30a}{%
+           family={Spinellis},
+           familyi={S\bibinitperiod},
+           given={Diomidis},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley Professional}%
+      }
+      \strng{namehash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{fullhash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{fullhashraw}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{bibnamehash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{authorbibnamehash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{authornamehash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{authorfullhash}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \strng{authorfullhashraw}{84b8e5364aab5f32e81e2aefc1cdb30a}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Code Reading: The Open Source Perspective}
+      \field{year}{2006}
+    \endentry
+    \entry{sriraman2021semantic}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=ff85114a8df7b0cb1f569c5344fe00e2}{%
+           family={Sriraman},
+           familyi={S\bibinitperiod},
+           given={Manu},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6e3b44589ac9b08ce749fe11047670eb}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Jaspreet},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=111e0a5c009713efb9b738adcf8ac085}{%
+           family={Schulze},
+           familyi={S\bibinitperiod},
+           given={Julian},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9bfbc841af43915c12169734f59a4e7b}{%
+           family={Zimmermann},
+           familyi={Z\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{326c148ff42796b73be75c78b8b7526f}
+      \strng{fullhash}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \strng{fullhashraw}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \strng{bibnamehash}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \strng{authorbibnamehash}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \strng{authornamehash}{326c148ff42796b73be75c78b8b7526f}
+      \strng{authorfullhash}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \strng{authorfullhashraw}{ababfdd1eb61fd1c96be1420d7debeb2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2021 IEEE/ACM 43rd International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP)}
+      \field{title}{Semantic Search for Complex Software Engineering Artifacts: An Industrial Case Study}
+      \field{year}{2021}
+      \field{pages}{41\bibrangedash 50}
+      \range{pages}{10}
+    \endentry
+    \entry{white2016content}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7988598546b60ae5376580c33ef7cb20}{%
+           family={White},
+           familyi={W\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Rosenfeld Media}%
+      }
+      \strng{namehash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{fullhash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{fullhashraw}{7988598546b60ae5376580c33ef7cb20}
+      \strng{bibnamehash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{authorbibnamehash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{authornamehash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{authorfullhash}{7988598546b60ae5376580c33ef7cb20}
+      \strng{authorfullhashraw}{7988598546b60ae5376580c33ef7cb20}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Content Strategy for Interfaces}
+      \field{year}{2016}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
