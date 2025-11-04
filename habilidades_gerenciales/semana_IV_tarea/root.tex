@@ -1,0 +1,43 @@
+% root.tex
+\documentclass[12pt]{article}
+
+% Paquetes esenciales
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{float} % para usar [H]
+\usepackage{pgfgantt}
+\usepackage{pdfpages}
+
+% Configuración del documento
+\geometry{left=3.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{1.5em}
+\doublespacing
+
+% Numeración de páginas
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{\thepage}
+
+% Capítulos en mayúsculas y sin número
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\filcenter}{}{0pt}{\LARGE}
+
+% Inclusión de documentos
+\begin{document}
+
+% Portada
+\input{sections/portada.tex}
+
+% Introducción
+\input{sections/reflexion_personal.tex}
+
+\end{document}
